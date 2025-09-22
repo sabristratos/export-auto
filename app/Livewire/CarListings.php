@@ -24,6 +24,7 @@ class CarListings extends Component
     public $minMileage = '';
     public $maxMileage = '';
     public $featuredOnly = false;
+    public $make = ''; // Make slug from URL
 
     // Sort properties
     public $sortBy = 'created_at';
@@ -31,6 +32,7 @@ class CarListings extends Component
 
     // Layout properties
     public $perPage = 12;
+    public $showMobileFilters = false;
 
     // Available filter options
     public $makes;
@@ -54,11 +56,21 @@ class CarListings extends Component
         'sortBy' => ['except' => 'created_at'],
         'sortDirection' => ['except' => 'desc'],
         'page' => ['except' => 1],
+        'make' => ['except' => ''], // Support make slug from URL
     ];
 
     public function mount()
     {
         $this->loadFilterOptions();
+
+        // Handle make slug from URL parameter
+        if ($this->make) {
+            $makeModel = Make::where('slug', $this->make)->first();
+            if ($makeModel) {
+                $this->selectedMake = $makeModel->id;
+                $this->updatedSelectedMake(); // Load models for this make
+            }
+        }
     }
 
     public function loadFilterOptions()
@@ -73,6 +85,9 @@ class CarListings extends Component
             }])
             ->orderBy('name')
             ->get();
+
+        // Initialize models collection
+        $this->models = collect();
 
         // Get unique years from car attributes
         $this->years = Car::published()
@@ -187,6 +202,28 @@ class CarListings extends Component
         ]);
         $this->models = collect();
         $this->resetPage();
+    }
+
+    public function toggleMobileFilters()
+    {
+        $this->showMobileFilters = !$this->showMobileFilters;
+    }
+
+    public function getActiveFiltersCountProperty()
+    {
+        $count = 0;
+
+        if ($this->search) $count++;
+        if ($this->selectedMake) $count++;
+        if ($this->selectedModel) $count++;
+        if ($this->minPrice || $this->maxPrice) $count++;
+        if ($this->selectedYear) $count++;
+        if ($this->selectedFuelType) $count++;
+        if ($this->selectedTransmission) $count++;
+        if ($this->minMileage || $this->maxMileage) $count++;
+        if ($this->featuredOnly) $count++;
+
+        return $count;
     }
 
     public function getFilteredCarsProperty()

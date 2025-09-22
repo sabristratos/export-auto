@@ -34,6 +34,20 @@ class ReviewForm extends Component
         'content.max' => 'Review must not exceed 1000 characters.',
     ];
 
+    protected function getMessages(): array
+    {
+        return [
+            'customer_name.required' => __('Please enter your name.'),
+            'customer_name.max' => __('Name must not exceed 255 characters.'),
+            'rating.required' => __('Please select a rating.'),
+            'rating.min' => __('Rating must be at least 1 star.'),
+            'rating.max' => __('Rating cannot exceed 5 stars.'),
+            'content.required' => __('Please share your experience.'),
+            'content.min' => __('Review must be at least 10 characters.'),
+            'content.max' => __('Review must not exceed 1000 characters.'),
+        ];
+    }
+
     #[On('openReviewModal')]
     public function openModal()
     {

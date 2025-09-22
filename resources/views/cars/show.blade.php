@@ -27,11 +27,11 @@
         $parkingSensors = $car->attributes->where('attribute.slug', 'parking_sensors')->first()?->value;
 
         // Format values
-        $formattedMileage = $mileage ? number_format($mileage) . ' km' : '';
-        $formattedPower = $enginePower ? $enginePower . ' HP' : '';
-        $formattedEngine = $engineSize ? $engineSize . 'L' : '';
-        $formattedDoors = $doors ? $doors . ' Doors' : '';
-        $formattedSeats = $seats ? $seats . ' Seats' : '';
+        $formattedMileage = $mileage ? number_format($mileage) . ' ' . __('km') : '';
+        $formattedPower = $enginePower ? $enginePower . ' ' . __('HP') : '';
+        $formattedEngine = $engineSize ? $engineSize . __('L') : '';
+        $formattedDoors = $doors ? $doors . ' ' . __('Doors') : '';
+        $formattedSeats = $seats ? $seats . ' ' . __('Seats') : '';
 
         // Get all car photos using Spatie Media Library
         $photos = $car->getMedia('photos');
@@ -54,9 +54,9 @@
             <!-- Breadcrumb -->
             <nav class="mb-6" aria-label="Breadcrumb">
                 <ol class="flex items-center space-x-2 text-sm">
-                    <li><a href="{{ route('home') }}" class="text-neutral-500 hover:text-neutral-900">Home</a></li>
+                    <li><a href="{{ route('home') }}" class="text-neutral-500 hover:text-neutral-900">{{ __('Home') }}</a></li>
                     <li class="text-neutral-400">/</li>
-                    <li><span class="text-neutral-500">{{ $car->make->name }}</span></li>
+                    <li><a href="{{ route('cars.index', ['make' => $car->make->slug]) }}" class="text-neutral-500 hover:text-neutral-900">{{ $car->make->name }}</a></li>
                     <li class="text-neutral-400">/</li>
                     <li class="text-neutral-900 font-medium">{{ $car->model->name }}</li>
                 </ol>
@@ -81,16 +81,16 @@
                                 <div class="flex items-end justify-between">
                                     <div class="flex items-center gap-4">
                                         <div>
-                                            <h1 class="text-4xl font-light">{{ $car->make->name }}</h1>
-                                            <h2 class="text-3xl font-semibold">{{ $car->model->name }}</h2>
+                                            <h1 class="text-2xl font-light">{{ $car->make->name }}</h1>
+                                            <h2 class="text-xl font-semibold">{{ $car->model->name }}</h2>
                                         </div>
                                         @if($hasLogo)
                                             <img src="{{ $logoUrl }}"
                                                  alt="{{ $car->make->name }} logo"
-                                                 class="h-12 w-auto object-contain opacity-90">
+                                                 class="h-10 w-auto object-contain opacity-90">
                                         @endif
                                     </div>
-                                    <div class="text-3xl font-bold">€{{ number_format($car->price) }}</div>
+                                    <div class="text-2xl font-bold">€{{ number_format($car->price) }}</div>
                                 </div>
                             </div>
                         </div>
@@ -111,8 +111,8 @@
 
                     <!-- Key Specifications Grid -->
                     <div class="bg-neutral-50 rounded-lg p-6">
-                        <h3 class="text-lg font-semibold text-neutral-900 mb-4">Key Specifications</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <h3 class="text-lg font-semibold text-neutral-900 mb-4">{{ __('Key Specifications') }}</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
                             <!-- Make -->
                             <div class="flex items-center gap-2 whitespace-nowrap">
                                 @if($hasLogo)
@@ -123,7 +123,7 @@
                                     <x-keys::icon name="heroicon-o-cube-transparent" size="sm" class="text-neutral-500" />
                                 @endif
                                 <div>
-                                    <div class="text-xs text-neutral-500 uppercase tracking-wide">Make</div>
+                                    <div class="text-xs text-neutral-500 uppercase tracking-wide">{{ __('Make') }}</div>
                                     <div class="font-semibold text-neutral-900">{{ $car->make->name }}</div>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                     </svg>
                                     <div>
-                                        <div class="text-xs text-neutral-500 uppercase tracking-wide">Year</div>
+                                        <div class="text-xs text-neutral-500 uppercase tracking-wide">{{ __('Year') }}</div>
                                         <div class="font-semibold text-neutral-900">{{ $year }}</div>
                                     </div>
                                 </div>
@@ -146,7 +146,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                                     </svg>
                                     <div>
-                                        <div class="text-xs text-neutral-500 uppercase tracking-wide">Mileage</div>
+                                        <div class="text-xs text-neutral-500 uppercase tracking-wide">{{ __('Mileage') }}</div>
                                         <div class="font-semibold text-neutral-900">{{ $formattedMileage }}</div>
                                     </div>
                                 </div>
@@ -158,7 +158,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                     </svg>
                                     <div>
-                                        <div class="text-xs text-neutral-500 uppercase tracking-wide">Power</div>
+                                        <div class="text-xs text-neutral-500 uppercase tracking-wide">{{ __('Power') }}</div>
                                         <div class="font-semibold text-neutral-900">{{ $formattedPower }}</div>
                                     </div>
                                 </div>
@@ -183,7 +183,7 @@
                                     @endphp
                                     <x-keys::icon :name="$fuelIcon" size="sm" class="text-neutral-500" />
                                     <div>
-                                        <div class="text-xs text-neutral-500 uppercase tracking-wide">Fuel Type</div>
+                                        <div class="text-xs text-neutral-500 uppercase tracking-wide">{{ __('Fuel Type') }}</div>
                                         <div class="flex items-center gap-2">
                                             <div class="font-semibold text-neutral-900">{{ $fuelType }}</div>
                                             <x-keys::badge variant="solid" :color="$fuelBadgeColor" size="xs">
@@ -201,7 +201,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                     </svg>
                                     <div>
-                                        <div class="text-xs text-neutral-500 uppercase tracking-wide">Transmission</div>
+                                        <div class="text-xs text-neutral-500 uppercase tracking-wide">{{ __('Transmission') }}</div>
                                         <div class="font-semibold text-neutral-900">{{ $transmission }}</div>
                                     </div>
                                 </div>
@@ -213,7 +213,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
                                     </svg>
                                     <div>
-                                        <div class="text-xs text-neutral-500 uppercase tracking-wide">Color</div>
+                                        <div class="text-xs text-neutral-500 uppercase tracking-wide">{{ __('Color') }}</div>
                                         <div class="font-semibold text-neutral-900">{{ $color }}</div>
                                     </div>
                                 </div>
@@ -225,19 +225,19 @@
                     <div class="grid grid-cols-2 gap-4 text-sm">
                         @if($formattedDoors)
                             <div class="flex justify-between">
-                                <span class="text-neutral-600">Doors:</span>
+                                <span class="text-neutral-600">{{ __('Doors:') }}</span>
                                 <span class="font-medium">{{ $formattedDoors }}</span>
                             </div>
                         @endif
                         @if($formattedSeats)
                             <div class="flex justify-between">
-                                <span class="text-neutral-600">Seats:</span>
+                                <span class="text-neutral-600">{{ __('Seats:') }}</span>
                                 <span class="font-medium">{{ $formattedSeats }}</span>
                             </div>
                         @endif
                         @if($formattedEngine)
                             <div class="flex justify-between">
-                                <span class="text-neutral-600">Engine Size:</span>
+                                <span class="text-neutral-600">{{ __('Engine Size:') }}</span>
                                 <span class="font-medium">{{ $formattedEngine }}</span>
                             </div>
                         @endif
@@ -246,46 +246,46 @@
                     <!-- Features -->
                     @if($airConditioning || $navigation || $leatherSeats || $sunroof || $electricWindows || $abs || $airbags || $parkingSensors)
                         <div>
-                            <h3 class="text-lg font-semibold text-neutral-900 mb-3">Features & Equipment</h3>
+                            <h3 class="text-lg font-semibold text-neutral-900 mb-3">{{ __('Features & Equipment') }}</h3>
                             <div class="flex flex-wrap gap-2">
                                 @if($airConditioning)
-                                    <x-keys::badge variant="subtle" color="success" size="sm">
-                                        Air Conditioning
+                                    <x-keys::badge variant="simple" color="neutral" size="sm">
+                                        {{ __('Air Conditioning') }}
                                     </x-keys::badge>
                                 @endif
                                 @if($navigation)
-                                    <x-keys::badge variant="subtle" color="success" size="sm">
-                                        Navigation System
+                                    <x-keys::badge variant="simple" color="neutral" size="sm">
+                                        {{ __('Navigation System') }}
                                     </x-keys::badge>
                                 @endif
                                 @if($leatherSeats)
-                                    <x-keys::badge variant="subtle" color="success" size="sm">
-                                        Leather Seats
+                                    <x-keys::badge variant="simple" color="neutral" size="sm">
+                                        {{ __('Leather Seats') }}
                                     </x-keys::badge>
                                 @endif
                                 @if($sunroof)
-                                    <x-keys::badge variant="subtle" color="success" size="sm">
-                                        Sunroof
+                                    <x-keys::badge variant="simple" color="neutral" size="sm">
+                                        {{ __('Sunroof') }}
                                     </x-keys::badge>
                                 @endif
                                 @if($electricWindows)
-                                    <x-keys::badge variant="subtle" color="success" size="sm">
-                                        Electric Windows
+                                    <x-keys::badge variant="simple" color="neutral" size="sm">
+                                        {{ __('Electric Windows') }}
                                     </x-keys::badge>
                                 @endif
                                 @if($abs)
-                                    <x-keys::badge variant="subtle" color="success" size="sm">
-                                        ABS
+                                    <x-keys::badge variant="simple" color="neutral" size="sm">
+                                        {{ __('ABS') }}
                                     </x-keys::badge>
                                 @endif
                                 @if($airbags)
-                                    <x-keys::badge variant="subtle" color="success" size="sm">
-                                        Airbags
+                                    <x-keys::badge variant="simple" color="neutral" size="sm">
+                                        {{ __('Airbags') }}
                                     </x-keys::badge>
                                 @endif
                                 @if($parkingSensors)
-                                    <x-keys::badge variant="subtle" color="success" size="sm">
-                                        Parking Sensors
+                                    <x-keys::badge variant="simple" color="neutral" size="sm">
+                                        {{ __('Parking Sensors') }}
                                     </x-keys::badge>
                                 @endif
                             </div>
@@ -295,7 +295,7 @@
                     <!-- Description -->
                     @if($car->description)
                         <div>
-                            <h3 class="text-lg font-semibold text-neutral-900 mb-3">Description</h3>
+                            <h3 class="text-lg font-semibold text-neutral-900 mb-3">{{ __('Description') }}</h3>
                             <p class="text-neutral-700 leading-relaxed">{{ $car->description }}</p>
                         </div>
                     @endif
@@ -315,8 +315,8 @@
     <div class="bg-white py-16">
         <div class="container-public">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-neutral-900 mb-4">You Might Also Like</h2>
-                <p class="text-neutral-600">Discover other premium vehicles from our collection</p>
+                <h2 class="text-3xl font-bold text-neutral-900 mb-4">{{ __('You Might Also Like') }}</h2>
+                <p class="text-neutral-600">{{ __('Discover other premium vehicles from our collection') }}</p>
             </div>
 
             @php
@@ -378,7 +378,7 @@
                 </div>
             @else
                 <div class="text-center text-neutral-500">
-                    <p>More vehicles will be available soon.</p>
+                    <p>{{ __('More vehicles will be available soon.') }}</p>
                 </div>
             @endif
         </div>
@@ -416,14 +416,14 @@
                             <div class="flex items-center mb-4">
                                 <div class="w-8 h-[1px] bg-neutral-400"></div>
                                 <span class="ml-4 text-sm tracking-[0.2em] uppercase font-helvetica font-light text-neutral-600">
-                                    Customer Reviews
+                                    {{ __('Customer Reviews') }}
                                 </span>
                             </div>
                             <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-4 font-helvetica">
-                                What Our Clients Say
+                                {{ __('What Our Clients Say') }}
                             </h2>
                             <p class="text-lg text-neutral-600 font-helvetica font-light leading-relaxed">
-                                Read testimonials from satisfied customers who have successfully exported their dream cars with us
+                                {{ __('Read testimonials from satisfied customers who have successfully exported their dream cars with us') }}
                             </p>
                         </div>
 
@@ -448,7 +448,7 @@
                                         @endif
                                     @endfor
                                 </div>
-                                <span class="text-lg font-light">Average Rating</span>
+                                <span class="text-lg font-light">{{ __('Average Rating') }}</span>
                             </div>
 
                             <!-- Review Count -->
@@ -457,7 +457,7 @@
                                 <div class="text-2xl font-helvetica font-bold text-brand-600">
                                     {{ $totalReviews }}+
                                 </div>
-                                <span class="text-lg font-light">Customer Reviews</span>
+                                <span class="text-lg font-light">{{ __('Customer Reviews') }}</span>
                             </div>
 
                             <!-- Satisfaction Rate -->
@@ -466,7 +466,7 @@
                                 <div class="text-2xl font-helvetica font-bold text-brand-600">
                                     {{ $satisfactionRate }}%
                                 </div>
-                                <span class="text-lg font-light">Satisfaction Rate</span>
+                                <span class="text-lg font-light">{{ __('Satisfaction Rate') }}</span>
                             </div>
                         </div>
 
@@ -478,7 +478,7 @@
                                 href="{{ route('contact') }}"
                                 class="w-full lg:w-auto px-8 py-4"
                             >
-                                Share Your Experience
+                                {{ __('Share Your Experience') }}
                             </x-keys::button>
                         </div>
                     </div>

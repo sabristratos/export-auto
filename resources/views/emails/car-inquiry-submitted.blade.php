@@ -1,9 +1,9 @@
 @extends('emails.layouts.base')
 
-@section('title', 'New Car Inquiry')
-@section('emailTitle', 'New Car Inquiry Received')
-@section('emailSubtitle', 'A potential customer is interested in one of your vehicles')
-@section('headerTagline', 'Premium European Car Export')
+@section('title', __('New Car Inquiry'))
+@section('emailTitle', __('New Car Inquiry Received'))
+@section('emailSubtitle', __('A potential customer is interested in one of your vehicles'))
+@section('headerTagline', __('Premium European Car Export'))
 
 @section('content')
     @php
@@ -16,10 +16,10 @@
 
     <!-- Vehicle Details Section -->
     <div class="content-section">
-        <h3>🚗 Vehicle Information</h3>
+        <h3>🚗 {{ __('Vehicle Information') }}</h3>
 
         <div class="field">
-            <div class="field-label">Make & Model</div>
+            <div class="field-label">{{ __('Make & Model') }}</div>
             <div class="field-value">
                 <strong>{{ $car->make->name }} {{ $car->model->name }}</strong>
                 @if($year)
@@ -30,40 +30,40 @@
 
         @if($mileage)
         <div class="field">
-            <div class="field-label">Mileage</div>
+            <div class="field-label">{{ __('Mileage') }}</div>
             <div class="field-value">{{ number_format($mileage) }} km</div>
         </div>
         @endif
 
         @if($fuelType)
         <div class="field">
-            <div class="field-label">Fuel Type</div>
+            <div class="field-label">{{ __('Fuel Type') }}</div>
             <div class="field-value">{{ $fuelType }}</div>
         </div>
         @endif
 
         @if($transmission)
         <div class="field">
-            <div class="field-label">Transmission</div>
+            <div class="field-label">{{ __('Transmission') }}</div>
             <div class="field-value">{{ $transmission }}</div>
         </div>
         @endif
 
         @if($bodyType)
         <div class="field">
-            <div class="field-label">Body Type</div>
+            <div class="field-label">{{ __('Body Type') }}</div>
             <div class="field-value">{{ $bodyType }}</div>
         </div>
         @endif
 
         <div class="field">
-            <div class="field-label">Price</div>
+            <div class="field-label">{{ __('Price') }}</div>
             <div class="price">€{{ number_format($car->price) }}</div>
         </div>
 
         @if($car->description)
         <div class="field">
-            <div class="field-label">Description</div>
+            <div class="field-label">{{ __('Description') }}</div>
             <div class="field-value">{{ Str::limit($car->description, 250) }}</div>
         </div>
         @endif
@@ -71,15 +71,15 @@
 
     <!-- Customer Information Section -->
     <div class="content-section">
-        <h3>👤 Customer Information</h3>
+        <h3>👤 {{ __('Customer Information') }}</h3>
 
         <div class="field">
-            <div class="field-label">Full Name</div>
+            <div class="field-label">{{ __('Full Name') }}</div>
             <div class="field-value">{{ $lead->name }}</div>
         </div>
 
         <div class="field">
-            <div class="field-label">Email Address</div>
+            <div class="field-label">{{ __('Email Address') }}</div>
             <div class="field-value">
                 <a href="mailto:{{ $lead->email }}" class="email-link">{{ $lead->email }}</a>
             </div>
@@ -87,7 +87,7 @@
 
         @if($lead->phone)
         <div class="field">
-            <div class="field-label">Phone Number</div>
+            <div class="field-label">{{ __('Phone Number') }}</div>
             <div class="field-value">
                 <a href="tel:{{ $lead->phone }}" class="email-link">{{ $lead->phone }}</a>
             </div>
@@ -95,19 +95,19 @@
         @endif
 
         <div class="field">
-            <div class="field-label">Inquiry Date</div>
+            <div class="field-label">{{ __('Inquiry Date') }}</div>
             <div class="field-value">{{ $lead->created_at->format('F j, Y \a\t g:i A') }}</div>
         </div>
 
         <div class="field">
-            <div class="field-label">Source</div>
+            <div class="field-label">{{ __('Source') }}</div>
             <div class="field-value">{{ ucfirst(str_replace('_', ' ', $lead->source)) }}</div>
         </div>
     </div>
 
     <!-- Customer Message Section -->
     <div class="content-section">
-        <h3>💬 Customer Message</h3>
+        <h3>💬 {{ __('Customer Message') }}</h3>
         <div class="field">
             <div class="field-value large">{{ $lead->message }}</div>
         </div>
@@ -117,20 +117,20 @@
     <div style="text-align: center; margin: 32px 0;">
         <a href="mailto:{{ $lead->email }}?subject=Re: Your inquiry about {{ $car->make->name }} {{ $car->model->name }}"
            class="email-button">
-            Reply via Email
+            {{ __('Reply via Email') }}
         </a>
 
         @if($lead->phone)
         <a href="tel:{{ $lead->phone }}"
            class="email-button secondary">
-            Call Customer
+            {{ __('Call Customer') }}
         </a>
         @endif
     </div>
 @endsection
 
 @section('footerMeta')
-    <p><strong>Inquiry Date:</strong> {{ $lead->created_at->format('F j, Y \a\t g:i A') }}</p>
-    <p><strong>Lead ID:</strong> #{{ $lead->id }} | <strong>Car ID:</strong> #{{ $car->id }}</p>
+    <p><strong>{{ __('Inquiry Date:') }}</strong> {{ $lead->created_at->format('F j, Y \a\t g:i A') }}</p>
+    <p><strong>{{ __('Lead ID:') }}</strong> #{{ $lead->id }} | <strong>{{ __('Car ID:') }}</strong> #{{ $car->id }}</p>
     <p>This inquiry was submitted through the car details page on {{ setting('site_name', 'Elite Car Export') }}</p>
 @endsection

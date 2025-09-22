@@ -2,21 +2,21 @@
     {{-- Header --}}
     <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Settings Management</h1>
-            <p class="text-sm text-gray-600 dark:text-gray-400">Manage your site settings and configuration</p>
+            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">{{ __('Settings Management') }}</h1>
+            <p class="text-sm text-gray-600 dark:text-gray-400">{{ __('Manage your site settings and configuration') }}</p>
         </div>
 
         <div class="flex gap-3">
             <x-keys::button variant="secondary" wire:click="clearCache">
-                Clear Cache
+                {{ __('Clear Cache') }}
             </x-keys::button>
 
             <x-keys::button variant="secondary" wire:click="$set('showSyncModal', true)">
-                Sync Config
+                {{ __('Sync Config') }}
             </x-keys::button>
 
             <x-keys::button wire:click="$set('showCreateModal', true)">
-                Add Setting
+                {{ __('Add Setting') }}
             </x-keys::button>
         </div>
     </div>
@@ -114,9 +114,9 @@
                                             variant="danger"
                                             size="sm"
                                             wire:click="deleteSetting('{{ $setting->key }}')"
-                                            wire:confirm="Are you sure you want to delete this setting?"
+                                            wire:confirm="{{ __('Are you sure you want to delete this setting?') }}"
                                         >
-                                            Delete
+                                            {{ __('Delete') }}
                                         </x-keys::button>
                                     </div>
 
@@ -138,7 +138,7 @@
 
                                                 @case(App\Enums\SettingType::Select)
                                                     <x-keys::select wire:model="settingValues.{{ $setting->key }}">
-                                                        <option value="">Select an option</option>
+                                                        <option value="">{{ __('Select an option') }}</option>
                                                         {{-- Options would be loaded from config --}}
                                                     </x-keys::select>
                                                     @break
@@ -166,7 +166,7 @@
                                                                 @if($setting->type === App\Enums\SettingType::Image)
                                                                     <img
                                                                         src="{{ $setting->getFileUrl('thumb') ?: $setting->getFileUrl() }}"
-                                                                        alt="Current image"
+                                                                        alt="{{ __('Current image') }}"
                                                                         class="w-20 h-20 object-cover rounded-lg border"
                                                                     />
                                                                 @else
@@ -189,7 +189,7 @@
 
                                                         @if(isset($fileUploads[$setting->key]) && $fileUploads[$setting->key])
                                                             <div wire:loading wire:target="fileUploads.{{ $setting->key }}" class="text-sm text-blue-600">
-                                                                Uploading...
+                                                                {{ __('Uploading...') }}
                                                             </div>
                                                         @endif
                                                     </div>
@@ -257,7 +257,7 @@
                                             variant="secondary"
                                             wire:click="updateSetting('{{ $setting->key }}')"
                                         >
-                                            Update
+                                            {{ __('Update') }}
                                         </x-keys::button>
                                     </div>
                                 </div>
@@ -269,7 +269,7 @@
                 <x-keys::card>
                     <div class="p-6 text-center">
                         <p class="text-gray-500 dark:text-gray-400">
-                            {{ $search ? 'No settings found matching your search.' : 'Select a group to view settings.' }}
+                            {{ $search ? __('No settings found matching your search.') : __('Select a group to view settings.') }}
                         </p>
                     </div>
                 </x-keys::card>
@@ -330,7 +330,7 @@
             <x-slot name="footer">
                 <div class="flex gap-3">
                     <x-keys::button variant="secondary" wire:click="$set('showCreateModal', false)">
-                        Cancel
+                        {{ __('Cancel') }}
                     </x-keys::button>
                     <x-keys::button wire:click="createSetting">
                         Create Setting
@@ -353,7 +353,7 @@
             <x-slot name="footer">
                 <div class="flex gap-3">
                     <x-keys::button variant="secondary" wire:click="$set('showSyncModal', false)">
-                        Cancel
+                        {{ __('Cancel') }}
                     </x-keys::button>
                     <x-keys::button wire:click="syncFromConfig">
                         Sync Settings

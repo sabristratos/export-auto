@@ -26,15 +26,15 @@
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex md:items-center md:gap-6">
                 <x-nav-item href="{{ route('home') }}" class="{{ $textClasses }}">
-                    Home
+                    {{ __('Home') }}
                 </x-nav-item>
 
                 <x-nav-item href="{{ route('cars.index') }}" class="{{ $textClasses }}">
-                    Cars
+                    {{ __('Cars') }}
                 </x-nav-item>
 
                 <x-nav-item href="{{ route('contact') }}" class="{{ $textClasses }}">
-                    Contact
+                    {{ __('Contact') }}
                 </x-nav-item>
             </nav>
 
@@ -43,7 +43,7 @@
                 <!-- Contact Button -->
                 <div class="hidden md:block">
                     <x-keys::button variant="brand" size="sm" href="tel:{{ setting('contact_phone') }}">
-                        Call Now
+                        {{ __('Call Now') }}
                     </x-keys::button>
                 </div>
 

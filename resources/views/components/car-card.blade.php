@@ -21,9 +21,9 @@
     $leatherSeats = $car->attributes->where('attribute.slug', 'leather_seats')->first()?->value;
 
     // Format values
-    $formattedMileage = $mileage ? number_format($mileage) . ' km' : '';
-    $formattedPower = $enginePower ? $enginePower . ' HP' : '';
-    $formattedDoors = $doors ? $doors . ' Doors' : '';
+    $formattedMileage = $mileage ? number_format($mileage) . ' ' . __('km') : '';
+    $formattedPower = $enginePower ? $enginePower . ' ' . __('HP') : '';
+    $formattedDoors = $doors ? $doors . ' ' . __('Doors') : '';
 @endphp
 
 <!-- Luxury Car Card -->
@@ -54,9 +54,10 @@
         <div class="mb-4">
             <!-- Make and Logo -->
             <div class="flex items-center justify-between mb-2">
-                <h3 class="text-2xl font-light text-neutral-900 font-helvetica">
+                <a href="{{ route('cars.index', ['make' => $car->make->slug]) }}"
+                   class="text-2xl font-light text-neutral-900 font-helvetica hover:text-brand-600 transition-colors">
                     {{ $car->make->name }}
-                </h3>
+                </a>
                 @if($hasLogo)
                     <img src="{{ $logoUrl }}"
                          alt="{{ $car->make->name }} logo"
@@ -79,7 +80,7 @@
                     <div class="flex items-start gap-2 whitespace-nowrap">
                         <x-keys::icon name="heroicon-o-calendar-days" size="sm" class="text-neutral-500 mt-0.5" />
                         <div>
-                            <div class="text-xs text-neutral-500 uppercase tracking-wide font-helvetica">Year</div>
+                            <div class="text-xs text-neutral-500 uppercase tracking-wide font-helvetica">{{ __('Year') }}</div>
                             <div class="text-sm font-semibold text-neutral-900">{{ $year }}</div>
                         </div>
                     </div>
@@ -89,7 +90,7 @@
                     <div class="flex items-start gap-2 whitespace-nowrap">
                         <x-keys::icon name="heroicon-o-calculator" size="sm" class="text-neutral-500 mt-0.5" />
                         <div>
-                            <div class="text-xs text-neutral-500 uppercase tracking-wide font-helvetica">Mileage</div>
+                            <div class="text-xs text-neutral-500 uppercase tracking-wide font-helvetica">{{ __('Mileage') }}</div>
                             <div class="text-sm font-semibold text-neutral-900">{{ $formattedMileage }}</div>
                         </div>
                     </div>
@@ -99,7 +100,7 @@
                     <div class="flex items-start gap-2 whitespace-nowrap">
                         <x-keys::icon name="heroicon-o-bolt" size="sm" class="text-neutral-500 mt-0.5" />
                         <div>
-                            <div class="text-xs text-neutral-500 uppercase tracking-wide font-helvetica">Power</div>
+                            <div class="text-xs text-neutral-500 uppercase tracking-wide font-helvetica">{{ __('Power') }}</div>
                             <div class="text-sm font-semibold text-neutral-900">{{ $formattedPower }}</div>
                         </div>
                     </div>
@@ -136,7 +137,7 @@
                 // Add other feature badges
                 if($airConditioning) {
                     $badges[] = [
-                        'label' => 'A/C',
+                        'label' => __('A/C'),
                         'icon' => 'heroicon-o-cloud',
                         'variant' => 'simple',
                         'color' => 'neutral'
@@ -145,7 +146,7 @@
 
                 if($navigation) {
                     $badges[] = [
-                        'label' => 'Navigation',
+                        'label' => __('Navigation'),
                         'icon' => 'heroicon-o-map-pin',
                         'variant' => 'simple',
                         'color' => 'neutral'
@@ -154,7 +155,7 @@
 
                 if($leatherSeats) {
                     $badges[] = [
-                        'label' => 'Leather',
+                        'label' => __('Leather'),
                         'icon' => 'heroicon-o-squares-2x2',
                         'variant' => 'simple',
                         'color' => 'neutral'
@@ -198,7 +199,7 @@
                     @if($hasMoreBadges)
                         <x-keys::badge variant="simple" color="neutral" size="xs">
                             <x-keys::icon name="heroicon-o-ellipsis-horizontal" size="xs" class="mr-1" />
-                            +{{ count($badges) - count($visibleBadges) }} more
+                            +{{ count($badges) - count($visibleBadges) }} {{ __('more') }}
                         </x-keys::badge>
                     @endif
                 </div>
@@ -219,7 +220,7 @@
                 size="sm"
                 href="{{ route('cars.show', $car->slug) }}"
                 class="w-full justify-center">
-                View Details
+                {{ __('View Details') }}
             </x-keys::button>
         </div>
     </div>

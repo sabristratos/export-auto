@@ -64,7 +64,7 @@
 
                 <!-- Decorated Heading -->
                 <x-decorated-heading
-                    :overline="'Legal Documentation'"
+                    :overline="__('Legal Documentation')"
                     :heading="$pageTitle"
                     :description="__('Last updated: :date', ['date' => now()->format('F j, Y')])"
                     alignment="center"

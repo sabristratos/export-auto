@@ -94,9 +94,9 @@
             <!-- Breadcrumb -->
             <nav class="mb-6" aria-label="Breadcrumb">
                 <ol class="flex items-center space-x-2 text-sm">
-                    <li><a href="{{ route('home') }}" class="text-neutral-500 hover:text-neutral-900">Home</a></li>
+                    <li><a href="{{ route('home') }}" class="text-neutral-500 hover:text-neutral-900">{{ __('Home') }}</a></li>
                     <li class="text-neutral-400">/</li>
-                    <li class="text-neutral-900 font-medium">Contact</li>
+                    <li class="text-neutral-900 font-medium">{{ __('Contact') }}</li>
                 </ol>
             </nav>
 

@@ -67,7 +67,7 @@ class SettingsManager extends Component
         $setting = Setting::where('key', $key)->first();
 
         if (!$setting) {
-            session()->flash('error', "Setting '{$key}' not found.");
+            session()->flash('error', __('Setting ":key" not found.', ['key' => $key]));
             return;
         }
 
@@ -78,9 +78,9 @@ class SettingsManager extends Component
             try {
                 Settings::set($key, $this->fileUploads[$key]);
                 $this->fileUploads[$key] = null;
-                session()->flash('success', "File setting '{$key}' updated successfully.");
+                session()->flash('success', __('File setting ":key" updated successfully.', ['key' => $key]));
             } catch (\Exception $e) {
-                session()->flash('error', "Error uploading file: {$e->getMessage()}");
+                session()->flash('error', __('Error uploading file: :message', ['message' => $e->getMessage()]));
             }
             return;
         }
@@ -88,15 +88,15 @@ class SettingsManager extends Component
         // Validate setting value
         $validation = Settings::validateSetting($key, $value);
         if (isset($validation['errors'])) {
-            session()->flash('error', "Validation failed for '{$key}': " . implode(', ', $validation['errors']));
+            session()->flash('error', __('Validation failed for ":key": :errors', ['key' => $key, 'errors' => implode(', ', $validation['errors'])]));
             return;
         }
 
         try {
             Settings::update($key, $value);
-            session()->flash('success', "Setting '{$key}' updated successfully.");
+            session()->flash('success', __('Setting ":key" updated successfully.', ['key' => $key]));
         } catch (\Exception $e) {
-            session()->flash('error', "Error updating setting: {$e->getMessage()}");
+            session()->flash('error', __('Error updating setting: :message', ['message' => $e->getMessage()]));
         }
     }
 
@@ -105,10 +105,10 @@ class SettingsManager extends Component
         try {
             Settings::delete($key);
             unset($this->settingValues[$key]);
-            session()->flash('success', "Setting '{$key}' deleted successfully.");
+            session()->flash('success', __('Setting ":key" deleted successfully.', ['key' => $key]));
             $this->loadSettings();
         } catch (\Exception $e) {
-            session()->flash('error', "Error deleting setting: {$e->getMessage()}");
+            session()->flash('error', __('Error deleting setting: :message', ['message' => $e->getMessage()]));
         }
     }
 
@@ -130,9 +130,9 @@ class SettingsManager extends Component
             $this->showCreateModal = false;
             $this->loadSettings();
 
-            session()->flash('success', "Setting '{$this->newSettingKey}' created successfully.");
+            session()->flash('success', __('Setting ":key" created successfully.', ['key' => $this->newSettingKey]));
         } catch (\Exception $e) {
-            session()->flash('error', "Error creating setting: {$e->getMessage()}");
+            session()->flash('error', __('Error creating setting: :message', ['message' => $e->getMessage()]));
         }
     }
 
@@ -142,15 +142,15 @@ class SettingsManager extends Component
             $synced = Settings::syncFromConfig();
 
             if (empty($synced)) {
-                session()->flash('info', 'All settings are already in sync.');
+                session()->flash('info', __('All settings are already in sync.'));
             } else {
-                session()->flash('success', 'Successfully synced ' . count($synced) . ' settings from configuration.');
+                session()->flash('success', __('Successfully synced :count settings from configuration.', ['count' => count($synced)]));
             }
 
             $this->loadSettings();
             $this->showSyncModal = false;
         } catch (\Exception $e) {
-            session()->flash('error', "Error syncing settings: {$e->getMessage()}");
+            session()->flash('error', __('Error syncing settings: :message', ['message' => $e->getMessage()]));
         }
     }
 
@@ -158,9 +158,9 @@ class SettingsManager extends Component
     {
         try {
             \Illuminate\Support\Facades\Cache::forget(config('settings.cache.key', 'site_settings'));
-            session()->flash('success', 'Settings cache cleared successfully.');
+            session()->flash('success', __('Settings cache cleared successfully.'));
         } catch (\Exception $e) {
-            session()->flash('error', "Error clearing cache: {$e->getMessage()}");
+            session()->flash('error', __('Error clearing cache: :message', ['message' => $e->getMessage()]));
         }
     }
 

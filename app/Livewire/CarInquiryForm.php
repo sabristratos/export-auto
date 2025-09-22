@@ -77,17 +77,20 @@ class CarInquiryForm extends Component
         'message' => 'required|string|min:10|max:500',
     ];
 
-    protected array $messages = [
-        'name.required' => 'Please enter your name.',
-        'name.max' => 'Name must not exceed 255 characters.',
-        'email.required' => 'Please enter your email address.',
-        'email.email' => 'Please enter a valid email address.',
-        'email.max' => 'Email must not exceed 255 characters.',
-        'phone.max' => 'Phone number must not exceed 50 characters.',
-        'message.required' => 'Please enter your message.',
-        'message.min' => 'Message must be at least 10 characters.',
-        'message.max' => 'Message must not exceed 500 characters.',
-    ];
+    protected function getMessages(): array
+    {
+        return [
+            'name.required' => __('Please enter your name.'),
+            'name.max' => __('Name must not exceed 255 characters.'),
+            'email.required' => __('Please enter your email address.'),
+            'email.email' => __('Please enter a valid email address.'),
+            'email.max' => __('Email must not exceed 255 characters.'),
+            'phone.max' => __('Phone number must not exceed 50 characters.'),
+            'message.required' => __('Please enter your message.'),
+            'message.min' => __('Message must be at least 10 characters.'),
+            'message.max' => __('Message must not exceed 500 characters.'),
+        ];
+    }
 
     public function submitInquiry()
     {
