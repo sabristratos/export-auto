@@ -33,9 +33,9 @@
             <div class="flex items-center gap-4">
                 <!-- Contact Button -->
                 <div class="hidden md:block">
-                    <x-custom-button variant="primary" size="sm" href="tel:{{ setting('contact_phone') }}">
+                    <x-keys::button variant="brand" size="sm" href="tel:{{ setting('contact_phone') }}">
                         Call Now
-                    </x-custom-button>
+                    </x-keys::button>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -81,13 +81,13 @@
 
                     <!-- Mobile Contact Button -->
                     <div class="pt-3">
-                        <x-custom-button
-                            variant="primary"
+                        <x-keys::button
+                            variant="brand"
                             size="md"
                             href="tel:{{ setting('contact_phone') }}"
                             class="w-full justify-center">
                             {{ __('Call Now') }}
-                        </x-custom-button>
+                        </x-keys::button>
                     </div>
                 </nav>
             </div>

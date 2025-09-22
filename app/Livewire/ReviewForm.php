@@ -39,14 +39,13 @@ class ReviewForm extends Component
     {
         $this->showModal = true;
         $this->showSuccess = false;
+        $this->resetForm();
     }
 
     public function closeModal()
     {
         $this->showModal = false;
         $this->showSuccess = false;
-
-        // Reset form when closing
         $this->resetForm();
     }
 
@@ -62,14 +61,11 @@ class ReviewForm extends Component
             'status' => ReviewStatus::Pending,
         ]);
 
-        // Reset form
-        $this->resetForm();
-
         // Show success message
         $this->showSuccess = true;
 
-        // Auto close modal after 3 seconds with success message
-        $this->dispatch('close-modal-after-success');
+        // Auto close modal after 3 seconds
+        $this->js('setTimeout(() => { $wire.closeModal() }, 3000)');
     }
 
     private function resetForm()

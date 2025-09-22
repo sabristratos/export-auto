@@ -9,7 +9,7 @@
 
 @php
     // Base classes for the custom button with sliding skewed background
-    $baseClasses = 'relative font-bold border-2 cursor-pointer inline-block overflow-hidden font-helvetica transition-all duration-300 z-10
+    $baseClasses = 'relative font-bold border-2 cursor-pointer inline-block whitespace-nowrap text-nowrap overflow-hidden font-helvetica transition-all duration-300 z-10
                     before:content-[""] before:absolute before:top-0 before:left-0 before:w-[120%] before:h-full before:z-[1] before:transition-transform before:duration-300 before:ease-out';
 
     // Variant classes
@@ -37,13 +37,15 @@
 @if($href)
     <a href="{{ $href }}"
        class="{{ $classes }}"
-       @if($disabled) aria-disabled="true" @endif>
+       @if($disabled) aria-disabled="true" @endif
+       {{ $attributes }}>
         <span class="relative z-20">{{ $slot }}</span>
     </a>
 @else
     <button type="{{ $type }}"
             class="{{ $classes }}"
-            @if($disabled) disabled @endif>
+            @if($disabled) disabled @endif
+            {{ $attributes }}>
         <span class="relative z-20">{{ $slot }}</span>
     </button>
 @endif

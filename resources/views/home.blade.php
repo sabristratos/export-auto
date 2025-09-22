@@ -2,6 +2,9 @@
     <!-- Hero Section -->
     <x-hero />
 
+    <!-- Featured Cars Section -->
+    <x-featured-cars-section />
+
     <!-- How to Export Your Dream Car Section -->
     <x-how-to-export />
 
@@ -9,6 +12,6 @@
     <x-partners-section />
 
     <!-- Customer Reviews Section -->
-    <x-reviews-section />
+    <livewire:reviews-section />
 
 </x-layouts.app>

@@ -101,6 +101,8 @@
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
+@source '../../vendor/keys/ui/resources/views/**/*.blade.php';
+@source '../../vendor/keys/ui/src/**/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
@@ -141,11 +143,6 @@
     --color-neutral-800: oklch(0.355 0.015 240);
     --color-neutral-900: oklch(0.305 0.012 240);
     --color-neutral-950: oklch(0.175 0.008 240);
-
-
-    /* Extended container sizes for luxury layouts */
-    --size-8xl: 90rem;
-    --size-9xl: 100rem;
 }
 
 /* Luxury Automotive Animations */
@@ -253,176 +250,20 @@ html {
     background: rgba(255, 255, 255, 0.5);
 }
 
-/* Default Typography & Element Styles for Luxury Car Export Site */
-body {
-    font-family: var(--font-helvetica);
-    font-weight: 400;
-    line-height: 1.6;
-    color: theme(colors.neutral.800);
-    background-color: theme(colors.neutral.50);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+
+
+/* Partner Logo Filters - Grayscale Effect */
+.partner-logo-filter {
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: filter, opacity, transform;
 }
 
-/* Heading Hierarchy with Luxury Typography */
-h1 {
-    font-family: var(--font-helvetica);
-    font-size: 3.5rem;
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: theme(colors.neutral.900);
-
-}
-
-h2 {
-    font-family: var(--font-helvetica);
-    font-size: 2.5rem;
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    color: theme(colors.neutral.900);
-
-}
-
-h3 {
-    font-family: var(--font-helvetica);
-    font-size: 1.875rem;
-    font-weight: 600;
-    line-height: 1.3;
-    color: theme(colors.neutral.800);
-
-}
-
-h4 {
-    font-family: var(--font-helvetica);
-    font-size: 1.5rem;
-    font-weight: 500;
-    line-height: 1.4;
-    color: theme(colors.neutral.800);
-
-}
-
-h5 {
-    font-family: var(--font-helvetica);
-    font-size: 1.25rem;
-    font-weight: 500;
-    line-height: 1.4;
-    color: theme(colors.neutral.700);
-
-}
-
-h6 {
-    font-family: var(--font-helvetica);
-    font-size: 1.125rem;
-    font-weight: 500;
-    line-height: 1.4;
-    color: theme(colors.neutral.700);
-
-}
-
-/* Paragraph and Text Defaults */
-p {
-    font-family: var(--font-helvetica);
-    font-size: 1.125rem;
-    font-weight: 400;
-    line-height: 1.7;
-    color: theme(colors.neutral.700);
-}
-
-/* Link Styles */
-a {
-    color: theme(colors.brand.600);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-a:hover {
-    color: theme(colors.brand.700);
-    text-decoration: underline;
-}
-
-/* List Styles */
-ul, ol {
-    font-family: var(--font-helvetica);
-    font-size: 1.125rem;
-    line-height: 1.7;
-    color: theme(colors.neutral.700);
-    margin-bottom: 1.5rem;
-    padding-left: 1.5rem;
-}
-
-li {
-    margin-bottom: 0.5rem;
-}
-
-/* Blockquote */
-blockquote {
-    font-family: var(--font-helvetica);
-    font-size: 1.25rem;
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.6;
-    color: theme(colors.neutral.600);
-    border-left: 4px solid theme(colors.brand.600);
-    padding-left: 1.5rem;
-    margin: 2rem 0;
-}
-
-/* Small Text */
-small {
-    font-size: 0.875rem;
-    color: theme(colors.neutral.600);
-}
-
-/* Strong and Emphasis */
-strong, b {
-    font-weight: 600;
-    color: theme(colors.neutral.800);
-}
-
-em, i {
-    font-style: italic;
-}
-
-/* Code and Pre */
-code {
-    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-    font-size: 0.875rem;
-    background-color: theme(colors.neutral.100);
-    color: theme(colors.neutral.800);
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-}
-
-pre {
-    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-    font-size: 0.875rem;
-    background-color: theme(colors.neutral.900);
-    color: theme(colors.neutral.100);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    overflow-x: auto;
-    margin-bottom: 1.5rem;
-}
-
-/* Responsive Typography Adjustments */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
-    }
-
-    h2 {
-        font-size: 2rem;
-    }
-
-    h3 {
-        font-size: 1.5rem;
-    }
-
-    p, ul, ol {
-        font-size: 1rem;
-    }
+.group:hover .partner-logo-filter {
+    filter: grayscale(0%);
+    opacity: 1;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 

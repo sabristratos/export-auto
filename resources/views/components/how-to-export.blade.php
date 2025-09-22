@@ -14,9 +14,9 @@
     <div class="max-w-8xl mx-auto px-6 lg:px-24 relative z-10">
         <!-- Section Header with Luxury Styling -->
         <x-decorated-heading
-            :overline="__('export.how_to_export.overline')"
-            :heading="__('export.how_to_export.heading')"
-            :description="__('export.how_to_export.description')"
+            :overline="__('Export Process')"
+            :heading="__('How to Export Your Dream Car')"
+            :description="__('Our streamlined process ensures your luxury vehicle reaches you safely and efficiently, anywhere in the world')"
             alignment="center"
             class="mb-28 luxury-fade-in"
         />
@@ -24,7 +24,7 @@
         <!-- Export Process Steps Grid with Luxury Animations -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mb-32">
             @php
-                $steps = __('export.how_to_export.steps');
+                $steps = __('steps');
             @endphp
 
             @if(is_array($steps))
@@ -42,32 +42,32 @@
                 {{-- Fallback: Manual step definition with animations --}}
                 <x-export-step-card
                     step="1"
-                    :title="__('export.how_to_export.steps.find_select.title')"
-                    :description="__('export.how_to_export.steps.find_select.description')"
+                    :title="__('Find & Select')"
+                    :description="__('Browse our premium collection and select your ideal luxury vehicle')"
                     icon="search"
                     class="luxury-fade-in"
                     style="animation-delay: 0s;"
                 />
                 <x-export-step-card
                     step="2"
-                    :title="__('export.how_to_export.steps.documentation.title')"
-                    :description="__('export.how_to_export.steps.documentation.description')"
+                    :title="__('Documentation')"
+                    :description="__('We handle all paperwork, permits, and legal requirements for export')"
                     icon="document"
                     class="luxury-fade-in"
                     style="animation-delay: 0.2s;"
                 />
                 <x-export-step-card
                     step="3"
-                    :title="__('export.how_to_export.steps.shipping.title')"
-                    :description="__('export.how_to_export.steps.shipping.description')"
+                    :title="__('Secure Shipping')"
+                    :description="__('Professional transportation with full insurance and tracking')"
                     icon="shipping"
                     class="luxury-fade-in"
                     style="animation-delay: 0.4s;"
                 />
                 <x-export-step-card
                     step="4"
-                    :title="__('export.how_to_export.steps.delivery.title')"
-                    :description="__('export.how_to_export.steps.delivery.description')"
+                    :title="__('Safe Delivery')"
+                    :description="__('Your vehicle arrives safely at your specified destination')"
                     icon="delivery"
                     class="luxury-fade-in"
                     style="animation-delay: 0.6s;"
@@ -93,31 +93,31 @@
             <!-- Premium Content -->
             <div class="relative z-10 max-w-4xl mx-auto">
                 <h3 class="!text-white text-4xl lg:text-5xl xl:text-6xl font-bold mb-8 font-helvetica leading-tight tracking-tight">
-                    {{ __('export.how_to_export.cta.title') }}
+                    {{ __('Ready to Export Your Dream Car?') }}
                 </h3>
 
                 <p class="!text-white/80 text-xl lg:text-2xl font-helvetica font-light mb-12 max-w-2xl mx-auto leading-relaxed">
-                    {{ __('export.how_to_export.cta.subtitle') }}
+                    {{ __('Contact our experts today for a personalized consultation and quote') }}
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-8 justify-center items-center">
-                    <x-custom-button
-                        variant="primary"
+                    <x-keys::button
+                        variant="brand"
                         size="lg"
                         href="#contact"
                         class="px-12 py-4"
                     >
-                        {{ __('export.how_to_export.cta.button_text') }}
-                    </x-custom-button>
+                        {{ __('Get Started Today') }}
+                    </x-keys::button>
 
-                    <x-custom-button
-                        variant="secondary"
+                    <x-keys::button
+                        variant="outline"
                         size="lg"
                         href="tel:{{ setting('contact_phone', '+1-555-0123') }}"
                         class="px-12 py-4"
                     >
-                        {{ __('export.how_to_export.cta.secondary_button_text') }}
-                    </x-custom-button>
+                        {{ __('Call Now') }}
+                    </x-keys::button>
                 </div>
             </div>
 
@@ -128,17 +128,6 @@
             <!-- Corner Accent Elements -->
             <div class="absolute top-8 left-8 w-16 h-16 border-t-2 border-l-2 border-white/20"></div>
             <div class="absolute bottom-8 right-8 w-16 h-16 border-b-2 border-r-2 border-white/20"></div>
-        </div>
-    </div>
-
-    <!-- Luxury Section Bottom Accent -->
-    <div class="mt-32 flex justify-center luxury-fade-in" style="animation-delay: 1s;">
-        <div class="flex items-center space-x-4">
-            <div class="w-16 h-[2px] bg-gradient-to-r from-transparent to-brand-500"></div>
-            <div class="w-3 h-3 bg-brand-600 rounded-full"></div>
-            <div class="w-32 h-[2px] bg-gradient-to-r from-brand-500 to-brand-600"></div>
-            <div class="w-3 h-3 bg-brand-600 rounded-full"></div>
-            <div class="w-16 h-[2px] bg-gradient-to-r from-brand-500 to-transparent"></div>
         </div>
     </div>
 </section>

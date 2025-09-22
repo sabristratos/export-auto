@@ -9,7 +9,7 @@
         <img
             src="{{ $make->getLogoUrl() }}"
             alt="{{ $make->name }} logo"
-            class="max-w-full max-h-20 w-auto h-auto object-contain transition-all duration-500 group-hover:scale-110"
+            class="partner-logo-filter max-w-full max-h-20 w-auto h-auto object-contain group-hover:scale-110"
             loading="lazy"
         >
     @else

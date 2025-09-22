@@ -1,9 +1,5 @@
-@props([
-    'class' => ''
-])
-
 <!-- Reviews Section -->
-<section class="py-24 lg:py-32 bg-neutral-50 relative overflow-hidden {{ $class }}">
+<section class="py-24 lg:py-32 bg-neutral-50 relative overflow-hidden">
     <!-- Subtle Background Elements -->
     <div class="absolute inset-0 opacity-[0.015]">
         <div class="absolute top-32 right-32 w-64 h-64 border border-neutral-300 rounded-full"></div>
@@ -11,17 +7,8 @@
     </div>
 
     <div class="max-w-8xl mx-auto px-6 lg:px-24 relative z-10">
-        @php
-            $reviews = \App\Models\Review::approved()
-                ->latest()
-                ->limit(6)
-                ->get();
-            $averageRating = $reviews->avg('rating') ?? 0;
-            $totalReviews = \App\Models\Review::approved()->count();
-        @endphp
-
         <!-- Two Column Layout -->
-        <div class="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-start">
+        <div class="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
             <!-- Left Column: Content & CTA -->
             <div class="mb-16 lg:mb-0">
                 <!-- Section Header -->
@@ -35,36 +22,33 @@
 
                 <!-- Review Stats -->
                 @if($totalReviews > 0)
-                    <div class="grid grid-cols-3 gap-6 mb-12 luxury-fade-in" style="animation-delay: 0.2s;">
+                    <div class="space-y-6 mb-12 luxury-fade-in" style="animation-delay: 0.2s;">
                         <!-- Average Rating -->
-                        <div class="text-center">
-                            <div class="text-2xl font-helvetica font-bold text-brand-600 mb-1">
+                        <div class="flex items-center space-x-3 text-neutral-600 font-helvetica">
+                            <div class="w-2 h-2 bg-brand-600 rounded-full"></div>
+                            <div class="text-2xl font-helvetica font-bold text-brand-600">
                                 {{ number_format($averageRating, 1) }}
                             </div>
-                            <x-star-rating-display :rating="$averageRating" size="sm" class="justify-center mb-1" />
-                            <div class="text-xs text-neutral-500 font-helvetica font-light">
-                                {{ __('Average Rating') }}
-                            </div>
+                            <x-star-rating-display :rating="$averageRating" size="sm" />
+                            <span class="text-lg font-light">{{ __('Average Rating') }}</span>
                         </div>
 
                         <!-- Review Count -->
-                        <div class="text-center">
-                            <div class="text-2xl font-helvetica font-bold text-brand-600 mb-2">
+                        <div class="flex items-center space-x-3 text-neutral-600 font-helvetica">
+                            <div class="w-2 h-2 bg-brand-600 rounded-full"></div>
+                            <div class="text-2xl font-helvetica font-bold text-brand-600">
                                 {{ $totalReviews }}+
                             </div>
-                            <div class="text-xs text-neutral-500 font-helvetica font-light">
-                                {{ __('Reviews') }}
-                            </div>
+                            <span class="text-lg font-light">{{ __('Customer Reviews') }}</span>
                         </div>
 
                         <!-- Satisfaction Rate -->
-                        <div class="text-center">
-                            <div class="text-2xl font-helvetica font-bold text-brand-600 mb-2">
+                        <div class="flex items-center space-x-3 text-neutral-600 font-helvetica">
+                            <div class="w-2 h-2 bg-brand-600 rounded-full"></div>
+                            <div class="text-2xl font-helvetica font-bold text-brand-600">
                                 {{ $reviews->where('rating', '>=', 4)->count() > 0 ? round(($reviews->where('rating', '>=', 4)->count() / $reviews->count()) * 100) : 0 }}%
                             </div>
-                            <div class="text-xs text-neutral-500 font-helvetica font-light">
-                                {{ __('Satisfaction') }}
-                            </div>
+                            <span class="text-lg font-light">{{ __('Satisfaction Rate') }}</span>
                         </div>
                     </div>
                 @endif
@@ -75,7 +59,7 @@
                         variant="brand"
                         size="lg"
                         icon="heroicon-o-star"
-                        wire:click="$dispatch('openReviewModal')"
+                        wire:click="openReviewModal"
                         class="w-full lg:w-auto px-8 py-4"
                     >
                         {{ __('Write a Review') }}

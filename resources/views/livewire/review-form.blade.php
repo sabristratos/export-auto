@@ -1,20 +1,27 @@
 <div>
     <!-- Review Form Modal -->
     <x-keys::modal
-        name="review-modal"
-        :title="__('export.reviews.form.title')"
+        id="review-modal"
+        title="{{ __('Write a Review') }}"
         size="lg"
+        wire:model="showModal"
+        wire:close="closeModal"
+        wire:open="openModal"
+        :closable="true"
+        :close-on-escape="true"
+        :close-on-backdrop="true"
     >
+
         @if($showSuccess)
             <!-- Success Alert -->
             <x-keys::alert variant="success" dismissible>
-                {{ __('export.reviews.form.success_message') }}
+                {{ __('Thank you for your review! It will be published after moderation.') }}
             </x-keys::alert>
         @else
             <!-- Modal Description -->
             <div class="mb-6">
                 <p class="text-neutral-600 font-helvetica">
-                    {{ __('export.reviews.form.subtitle') }}
+                    {{ __('Share your experience with our car export services') }}
                 </p>
             </div>
 
@@ -24,7 +31,7 @@
                 <x-keys::input
                     name="customer_name"
                     wire:model="customer_name"
-                    :label="__('export.reviews.form.customer_name')"
+                    :label="__('Your Name')"
                     required
                     size="lg"
                     :errors="$errors->get('customer_name')"
@@ -35,7 +42,7 @@
                 <x-keys::input
                     name="customer_location"
                     wire:model="customer_location"
-                    :label="__('export.reviews.form.customer_location')"
+                    :label="__('Your Location')"
                     optional
                     size="lg"
                     icon-left="heroicon-o-map-pin"
@@ -46,7 +53,7 @@
                     <x-keys::range
                         name="rating"
                         wire:model.live="rating"
-                        :label="__('export.reviews.form.rating_label')"
+                        :label="__('Rating')"
                         min="1"
                         max="5"
                         step="1"
@@ -65,32 +72,28 @@
                 </div>
 
                 <!-- Review Content -->
-                <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-sm font-medium text-neutral-700">
-                            {{ __('export.reviews.form.review_content') }}
-                        </span>
-                        <span class="text-sm text-neutral-500">
-                            {{ $this->characterCount }} {{ __('export.reviews.form.character_limit') }}
-                        </span>
-                    </div>
-
+                <x-keys::field :label="__('Review')" required>
                     <x-keys::textarea
                         name="content"
                         wire:model.live="content"
-                        :placeholder="__('export.reviews.form.review_content')"
+                        :placeholder="__('Share your experience with our services...')"
                         rows="4"
                         size="lg"
                         clearable
                         required
                         :errors="$errors->get('content')"
                     />
-                </div>
+                    <div class="flex justify-end mt-1">
+                        <span class="text-sm text-neutral-500">
+                            {{ $this->characterCount }} {{ __('characters remaining') }}
+                        </span>
+                    </div>
+                </x-keys::field>
 
                 <!-- Moderation Notice -->
                 <x-keys::alert variant="info">
                     <x-slot:title>Review Guidelines</x-slot:title>
-                    {{ __('export.reviews.form.moderation_notice') }}
+                    {{ __('All reviews are moderated before publication to ensure quality and authenticity.') }}
                 </x-keys::alert>
             </form>
         @endif
@@ -112,7 +115,7 @@
                         wire:click="closeModal"
                         size="lg"
                     >
-                        {{ __('export.reviews.form.cancel_button') }}
+                        {{ __('Cancel') }}
                     </x-keys::button>
 
                     <x-keys::button
@@ -123,7 +126,7 @@
                         icon="heroicon-o-paper-airplane"
                         size="lg"
                     >
-                        {{ __('export.reviews.form.submit_button') }}
+                        {{ __('Submit Review') }}
                     </x-keys::button>
                 </div>
             @endif
@@ -141,14 +144,20 @@
         }
     </style>
 
-    <!-- Modal Auto-close JavaScript -->
+    <!-- Debug Modal Events -->
     <script>
-        document.addEventListener('livewire:init', () => {
-            Livewire.on('close-modal-after-success', () => {
-                setTimeout(() => {
-                    @this.call('closeModal');
-                }, 3000); // Close modal after 3 seconds
-            });
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof Livewire !== 'undefined') {
+                Livewire.on('openModal', (data) => {
+                    const eventData = Array.isArray(data) ? data[0] : data;
+                    if (eventData && (eventData.id === 'review-modal' || eventData.modal === 'review-modal')) {
+                        const modal = document.getElementById('review-modal');
+                        if (modal) {
+                            modal.showModal();
+                        }
+                    }
+                });
+            }
         });
     </script>
 </div>

@@ -1,10 +1,10 @@
 @props([
-    'title' => __('hero.title'),
-    'description' => __('hero.description'),
+    'title' => __('Luxury Car Export Specialists'),
+    'description' => __('Premium European and luxury vehicles exported worldwide with unmatched expertise and service'),
     'image' => 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7',
-    'primaryButtonText' => __('hero.browse_collection'),
+    'primaryButtonText' => __('Browse Our Collection'),
     'primaryButtonUrl' => '#cars',
-    'secondaryButtonText' => __('hero.get_quote'),
+    'secondaryButtonText' => __('Get a Quote'),
     'secondaryButtonUrl' => null,
     'class' => '',
 ])
@@ -17,7 +17,7 @@
 <section class="relative h-screen flex items-center overflow-hidden {{ $class }}">
     <!-- Background Image with Luxury Treatment -->
     <img src="{{ $image }}"
-         alt="{{ __('hero.car_background_alt') }}"
+         alt="{{ __('Luxury car background') }}"
          class="absolute inset-0 w-full h-full object-cover z-0 scale-105 hero-bg-parallax luxury-scale-in">
 
     <!-- Sophisticated Gradient Overlay -->
@@ -36,34 +36,34 @@
                 <div class="flex items-center mb-6 space-x-4 luxury-slide-in" style="animation-delay: 0.2s;">
                     <div class="w-8 h-[1px] bg-white/60"></div>
                     <span class="!text-white/80 text-sm tracking-[0.2em] uppercase font-helvetica font-light">
-                        {{ __('hero.luxury_badge') }}
+                        {{ __('Premium Export Services') }}
                     </span>
                 </div>
 
                 <!-- Main Title with Luxury Typography -->
                 <h1 class="!text-white mb-8 font-helvetica leading-[0.9] tracking-tight">
                     <span class="block text-4xl md:text-6xl xl:text-7xl font-light mb-2 luxury-fade-in" style="animation-delay: 0.4s;">
-                        {{ __('hero.title_line_1') }}
+                        {{ __('Luxury Car') }}
                     </span>
                     <span class="block text-5xl md:text-7xl xl:text-8xl font-bold luxury-fade-in" style="animation-delay: 0.6s;">
-                        {{ __('hero.title_line_2') }}
+                        {{ __('Export Specialists') }}
                     </span>
                 </h1>
 
                 <!-- Elegant Description -->
                 <p class="!text-white/90 text-lg md:text-xl font-helvetica font-light leading-relaxed mb-12 max-w-xl luxury-fade-in" style="animation-delay: 0.8s;">
-                    {{ __('hero.description') }}
+                    {{ __('Premium European and luxury vehicles exported worldwide with unmatched expertise and service') }}
                 </p>
 
                 <!-- Luxury Action Buttons -->
                 <div class="flex flex-col sm:flex-row gap-6 luxury-fade-in" style="animation-delay: 1s;">
-                    <x-custom-button variant="primary" size="lg" href="{{ $primaryButtonUrl }}">
+                    <x-keys::button variant="brand" size="lg" href="{{ $primaryButtonUrl }}">
                         {{ $primaryButtonText }}
-                    </x-custom-button>
+                    </x-keys::button>
 
-                    <x-custom-button variant="secondary" size="lg" href="{{ $secondaryUrl }}">
+                    <x-keys::button variant="outline" class="text-white hover:text-brand" size="lg" href="{{ $secondaryUrl }}">
                         {{ $secondaryButtonText }}
-                    </x-custom-button>
+                    </x-keys::button>
                 </div>
             </div>
 
@@ -73,10 +73,10 @@
                     <!-- Luxury Features/Stats could go here -->
                     <div class="border-t border-white/20 pt-6">
                         <div class="!text-white/70 text-xs tracking-widest uppercase font-helvetica font-light">
-                            {{ __('hero.experience_since') }}
+                            {{ __('Exporting Since') }}
                         </div>
                         <div class="!text-white text-2xl font-helvetica font-light mt-1">
-                            {{ date('Y') - 2010 }}+ {{ __('hero.years_excellence') }}
+                            {{ date('Y') - 2010 }}+ {{ __('Years of Excellence') }}
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
     <!-- Luxury Scroll Indicator -->
     <div class="absolute bottom-16 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center !text-white/60">
         <span class="!text-white/60 text-xs tracking-widest uppercase font-helvetica font-light">
-            {{ __('hero.scroll_discover') }}
+            {{ __('Scroll to Discover') }}
         </span>
         <x-scroll-indicator />
     </div>

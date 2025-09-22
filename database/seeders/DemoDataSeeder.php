@@ -16,10 +16,19 @@ use App\Models\Lead;
 use App\Models\Make;
 use App\Models\Review;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 class DemoDataSeeder extends Seeder
 {
+    protected array $carPhotoUrls = [
+        'https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'https://images.unsplash.com/photo-1662134632184-383a3432e6a3?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'https://images.unsplash.com/photo-1622942904360-b00e03c4c521?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'https://images.unsplash.com/photo-1486326658981-ed68abe5868e?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    ];
+
     public function run(): void
     {
         $this->seedMakes();
@@ -511,6 +520,32 @@ class DemoDataSeeder extends Seeder
                     }
                 }
             }
+
+            // Attach a random car photo
+            $this->attachCarPhoto($car);
+        }
+    }
+
+    private function attachCarPhoto($car): void
+    {
+        try {
+            // Load the car with its relationships
+            $car = $car->load(['make', 'model']);
+
+            // Get a random photo URL from the array
+            $photoUrl = $this->carPhotoUrls[array_rand($this->carPhotoUrls)];
+
+            // Clear existing photos first
+            $car->clearMediaCollection('photos');
+
+            // Add photo from URL using Spatie Media Library
+            $car->addMediaFromUrl($photoUrl)
+                ->usingName($car->make->name . ' ' . $car->model->name)
+                ->toMediaCollection('photos');
+
+            echo "✓ Added photo to {$car->make->name} {$car->model->name}\n";
+        } catch (\Exception $e) {
+            echo "✗ Failed to add photo to {$car->make->name} {$car->model->name}: {$e->getMessage()}\n";
         }
     }
 

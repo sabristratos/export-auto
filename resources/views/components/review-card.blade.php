@@ -3,76 +3,57 @@
     'class' => ''
 ])
 
-@php
-    $customerInitials = collect(explode(' ', $review->customer_name))
-        ->take(2)
-        ->map(fn($name) => strtoupper(substr($name, 0, 1)))
-        ->join('');
-
-    $avatarColors = [
-        'bg-blue-500', 'bg-purple-500', 'bg-green-500', 'bg-yellow-500',
-        'bg-pink-500', 'bg-indigo-500', 'bg-red-500', 'bg-teal-500'
-    ];
-    $avatarColor = $avatarColors[strlen($review->customer_name) % count($avatarColors)];
-@endphp
-
-<div class="group relative bg-white/80 backdrop-blur-sm border border-neutral-200/50 rounded-2xl p-8 hover:bg-white/90 hover:shadow-lg transition-all duration-500 {{ $class }}">
-    <!-- Customer Info -->
-    <div class="flex items-start space-x-4 mb-6">
-        <!-- Avatar -->
-        <div class="flex-shrink-0 w-12 h-12 {{ $avatarColor }} rounded-full flex items-center justify-center text-white font-helvetica font-bold">
-            {{ $customerInitials }}
-        </div>
-
-        <!-- Customer Details -->
-        <div class="flex-1 min-w-0">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h4 class="font-helvetica font-semibold text-neutral-900 text-lg">
-                        {{ $review->customer_name }}
-                    </h4>
-                    @if($review->customer_location)
-                        <p class="text-neutral-500 text-sm font-helvetica font-light">
-                            {{ $review->customer_location }}
-                        </p>
-                    @endif
-                </div>
-
-                <!-- Verified Badge -->
-                <div class="flex items-center space-x-2">
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-100 text-brand-800 font-helvetica">
-                        {{ __('export.reviews.display.verified_purchase') }}
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<div class="max-w-4xl mx-auto text-left space-y-6 {{ $class }}">
     <!-- Star Rating -->
-    <div class="mb-4">
-        <x-star-rating-display :rating="$review->rating" size="sm" />
+    <div class="mb-6">
+        <x-star-rating-display :rating="$review->rating" size="md" />
     </div>
 
     <!-- Review Content -->
-    <div class="mb-6">
-        <p class="text-neutral-700 font-helvetica font-light leading-relaxed text-lg">
-            {{ $review->content }}
-        </p>
+    <div class="mb-8">
+        <blockquote class="text-neutral-700 font-helvetica font-light leading-relaxed text-lg">
+            "{{ $review->content }}"
+        </blockquote>
     </div>
 
-    <!-- Review Meta -->
-    <div class="flex items-center justify-between text-sm text-neutral-400 font-helvetica font-light">
-        <span>
-            {{ $review->created_at->diffForHumans() }}
-        </span>
+    <!-- Customer Information -->
+    <div class="space-y-2">
+        <!-- Customer name -->
+        <h4 class="font-helvetica font-medium text-neutral-900 text-base">
+            {{ $review->customer_name }}
+        </h4>
 
-        @if($review->car)
-            <span class="text-brand-600 font-medium">
-                {{ $review->car->make->name }} {{ $review->car->model->name ?? '' }}
+        <!-- Location and date -->
+        <div class="flex items-center space-x-3 text-sm text-neutral-500 font-helvetica font-light">
+            @if($review->customer_location)
+                <span class="flex items-center space-x-1">
+                    <svg class="w-3 h-3 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <span>{{ $review->customer_location }}</span>
+                </span>
+                <span class="text-neutral-300">•</span>
+            @endif
+
+            <span class="flex items-center space-x-1">
+                <svg class="w-3 h-3 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>{{ $review->created_at->diffForHumans() }}</span>
             </span>
+        </div>
+
+        <!-- Car model badge (if available) -->
+        @if($review->car)
+            <div class="mt-3">
+                <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-brand-50 text-brand-700 font-helvetica">
+                    <svg class="w-3 h-3 mr-1.5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"></path>
+                    </svg>
+                    {{ $review->car->make->name }} {{ $review->car->model->name ?? '' }}
+                </span>
+            </div>
         @endif
     </div>
-
-    <!-- Subtle hover accent -->
-    <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-brand-50/0 to-brand-100/0 group-hover:from-brand-50/20 group-hover:to-brand-100/10 transition-all duration-500 pointer-events-none"></div>
 </div>

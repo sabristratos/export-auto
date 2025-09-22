@@ -65,9 +65,9 @@
                 <div class="lg:col-span-2 luxury-fade-in" style="animation-delay: 0.4s;">
                     <!-- Section Header -->
                     <x-decorated-heading
-                        :overline="__('export.partners.overline')"
-                        :heading="__('export.partners.heading')"
-                        :description="__('export.partners.description')"
+                        :overline="__('Trusted Partners')"
+                        :heading="__('Premium Automotive Brands')"
+                        :description="__('We work exclusively with the world\'s most prestigious automotive manufacturers')"
                         alignment="left"
                         class="mb-12"
                     />
@@ -76,11 +76,11 @@
                     <div class="space-y-6">
                         <div class="flex items-center space-x-3 text-neutral-600 font-helvetica">
                             <div class="w-2 h-2 bg-brand-600 rounded-full"></div>
-                            <span class="text-lg font-light">{{ $partners->count() }}+ {{ __('export.partners.trusted_brands') }}</span>
+                            <span class="text-lg font-light">{{ $partners->count() }}+ {{ __('Trusted Brands') }}</span>
                         </div>
                         <div class="flex items-center space-x-3 text-neutral-600 font-helvetica">
                             <div class="w-2 h-2 bg-brand-600 rounded-full"></div>
-                            <span class="text-lg font-light">{{ __('export.partners.worldwide_network') }}</span>
+                            <span class="text-lg font-light">{{ __('Worldwide Network') }}</span>
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
             <!-- No partners state -->
             <div class="text-center py-16">
                 <div class="text-neutral-400 font-helvetica font-light text-lg">
-                    {{ __('export.partners.no_partners') }}
+                    {{ __('No partners available') }}
                 </div>
             </div>
         @endif
