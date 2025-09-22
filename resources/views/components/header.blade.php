@@ -1,30 +1,39 @@
 @props([
+    'variant' => 'overlay', // 'overlay' or 'standard'
     'class' => '',
 ])
 
-<header class="absolute top-0 left-0 right-0 z-50 {{ $class }}" x-data="{ mobileMenuOpen: false }">
-    <div class="w-full">
-        <div class="flex h-20 items-center justify-between px-6 lg:px-8">
+@php
+    $isOverlay = $variant === 'overlay';
+    $headerClasses = $isOverlay
+        ? 'absolute left-0 right-0 z-50'
+        : 'relative bg-white border-b border-neutral-200 z-50';
+    $textClasses = $isOverlay ? 'text-white' : 'text-neutral-900';
+    $logoVariant = $isOverlay ? 'light' : 'dark';
+    $mobileBackgroundClasses = $isOverlay
+        ? 'bg-black bg-opacity-90 backdrop-blur-sm'
+        : 'bg-white border-t border-neutral-200';
+@endphp
+
+<header class="{{ $headerClasses }} {{ $class }}" x-data="{ mobileMenuOpen: false }">
+    <div class="container-public">
+        <div class="flex h-20 items-center justify-between">
             <!-- Logo -->
             <div class="flex flex-shrink-0 items-center">
-                <x-logo size="lg" :link="true" />
+                <x-logo size="xl" :link="true" :variant="$logoVariant" />
             </div>
 
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex md:items-center md:gap-6">
-                <x-nav-item href="{{ route('home') }}" class="text-white">
+                <x-nav-item href="{{ route('home') }}" class="{{ $textClasses }}">
                     Home
                 </x-nav-item>
 
-                <x-nav-item href="#" class="text-white">
+                <x-nav-item href="{{ route('cars.index') }}" class="{{ $textClasses }}">
                     Cars
                 </x-nav-item>
 
-                <x-nav-item href="#" class="text-white">
-                    About
-                </x-nav-item>
-
-                <x-nav-item href="#" class="text-white">
+                <x-nav-item href="{{ route('contact') }}" class="{{ $textClasses }}">
                     Contact
                 </x-nav-item>
             </nav>
@@ -44,7 +53,7 @@
                         variant="ghost"
                         size="sm"
                         icon=""
-                        class="text-white hover:text-white"
+                        class="{{ $textClasses }} hover:{{ $isOverlay ? 'text-white' : 'text-neutral-700' }}"
                         @click="mobileMenuOpen = !mobileMenuOpen"
                         ::aria-expanded="mobileMenuOpen" />
                 </div>
@@ -61,21 +70,18 @@
              x-transition:leave-start="opacity-100 scale-100"
              x-transition:leave-end="opacity-0 scale-95"
              style="display: none;">
-            <div class="bg-black bg-opacity-90 backdrop-blur-sm px-6 py-3">
+            <div class="{{ $mobileBackgroundClasses }} py-3">
+                <div class="container-public">
                 <nav class="space-y-1">
-                    <x-nav-item href="{{ route('home') }}" :mobile="true" class="text-white">
+                    <x-nav-item href="{{ route('home') }}" :mobile="true" class="{{ $textClasses }}">
                         {{ __('Home') }}
                     </x-nav-item>
 
-                    <x-nav-item href="#" :mobile="true" class="text-white">
+                    <x-nav-item href="{{ route('cars.index') }}" :mobile="true" class="{{ $textClasses }}">
                         {{ __('Cars') }}
                     </x-nav-item>
 
-                    <x-nav-item href="#" :mobile="true" class="text-white">
-                        {{ __('About') }}
-                    </x-nav-item>
-
-                    <x-nav-item href="#" :mobile="true" class="text-white">
+                    <x-nav-item href="{{ route('contact') }}" :mobile="true" class="{{ $textClasses }}">
                         {{ __('Contact') }}
                     </x-nav-item>
 
@@ -90,6 +96,7 @@
                         </x-keys::button>
                     </div>
                 </nav>
+                </div>
             </div>
         </div>
     </div>

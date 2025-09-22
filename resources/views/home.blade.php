@@ -14,4 +14,7 @@
     <!-- Customer Reviews Section -->
     <livewire:reviews-section />
 
+    <!-- Contact Section -->
+    <x-contact-section />
+
 </x-layouts.app>

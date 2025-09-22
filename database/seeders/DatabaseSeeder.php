@@ -21,11 +21,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+            SettingsSeeder::class,
             DemoDataSeeder::class,
-        ]);
-
-        $this->call([
             MakeSeeder::class,
+            LegalContentSeeder::class,
         ]);
     }
 }

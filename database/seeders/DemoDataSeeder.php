@@ -500,14 +500,13 @@ class DemoDataSeeder extends Seeder
                 if ($attribute) {
                     if ($attribute->type === AttributeType::Select) {
                         $attributeValue = AttributeValue::where('attribute_id', $attribute->id)
-                            ->whereJsonContains('value->en', $value)
+                            ->whereRaw("JSON_EXTRACT(value, '$.en') = ?", [$value])
                             ->first();
 
                         if ($attributeValue) {
                             CarAttribute::create([
                                 'car_id' => $car->id,
                                 'attribute_id' => $attribute->id,
-                                'attribute_value_id' => $attributeValue->id,
                                 'value' => $value,
                             ]);
                         }

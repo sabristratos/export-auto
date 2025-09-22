@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Image\Enums\Fit;
 use Spatie\Translatable\HasTranslations;
 
 class Car extends Model implements HasMedia
@@ -98,5 +100,52 @@ class Car extends Model implements HasMedia
             $query->where('price', '<=', $max);
         }
         return $query;
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('photos')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp'])
+            ->useFallbackUrl('/images/car-placeholder.jpg');
+
+        $this->addMediaCollection('gallery')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp']);
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->fit(Fit::Crop, 300, 200)
+            ->quality(90)
+            ->format('webp')
+            ->performOnCollections('photos', 'gallery');
+
+        $this->addMediaConversion('preview')
+            ->fit(Fit::Crop, 600, 400)
+            ->quality(85)
+            ->format('webp')
+            ->performOnCollections('photos', 'gallery');
+
+        $this->addMediaConversion('large')
+            ->fit(Fit::Contain, 1200, 800)
+            ->quality(85)
+            ->format('webp')
+            ->performOnCollections('photos', 'gallery');
+    }
+
+    // Helper methods for photo access
+    public function getMainPhotoUrl(string $conversion = ''): string
+    {
+        $photo = $this->getFirstMedia('photos');
+        if (!$photo) {
+            return 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=1200&auto=format&fit=crop';
+        }
+
+        return $conversion ? $photo->getUrl($conversion) : $photo->getUrl();
+    }
+
+    public function hasPhotos(): bool
+    {
+        return $this->hasMedia('photos');
     }
 }

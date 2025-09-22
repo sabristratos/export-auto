@@ -34,7 +34,7 @@ class Setting extends Model implements HasMedia
         ];
     }
 
-    public array $translatable = ['description'];
+    public array $translatable = ['description', 'value'];
 
     public function registerMediaCollections(): void
     {

@@ -1282,16 +1282,16 @@
         },
         {
             "name": "keys/ui",
-            "version": "1.2.6",
+            "version": "1.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sabristratos/keys.git",
-                "reference": "94f45214492a072f516da25650ab6f63358a2d1c"
+                "reference": "d11d1b7eb6ab07d2c8b5fb7cbb995aa017720aaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sabristratos/keys/zipball/94f45214492a072f516da25650ab6f63358a2d1c",
-                "reference": "94f45214492a072f516da25650ab6f63358a2d1c",
+                "url": "https://api.github.com/repos/sabristratos/keys/zipball/d11d1b7eb6ab07d2c8b5fb7cbb995aa017720aaf",
+                "reference": "d11d1b7eb6ab07d2c8b5fb7cbb995aa017720aaf",
                 "shasum": ""
             },
             "require": {
@@ -1346,7 +1346,7 @@
                 "issues": "https://github.com/sabristratos/keys/issues",
                 "source": "https://github.com/sabristratos/keys"
             },
-            "time": "2025-09-22T08:08:17+00:00"
+            "time": "2025-09-22T15:33:18+00:00"
         },
         {
             "name": "laravel/framework",

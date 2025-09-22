@@ -36,19 +36,23 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
-
+        @stack('meta')
 
     </head>
     <body class="min-h-screen bg-neutral-50 font-helvetica antialiased"
           data-locale="{{ app()->getLocale() }}"
           data-direction="{{ in_array(app()->getLocale(), ['ar', 'he', 'fa', 'ur']) ? 'rtl' : 'ltr' }}">
         <!-- Header -->
-        <x-header />
+        <x-header :variant="$headerVariant ?? 'overlay'" />
 
         <!-- Main Content -->
-        <main>
+        <main class="{{ ($headerVariant ?? 'overlay') === 'standard' ? 'pt-0' : '' }}">
             {{ $slot }}
         </main>
+
+        <!-- Footer -->
+        <x-footer />
+
         @livewireScripts
         <x-keys::scripts />
     </body>

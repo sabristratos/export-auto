@@ -3,7 +3,7 @@
 ])
 
 <!-- How to Export Your Dream Car Section -->
-<section class="py-24 lg:py-40 bg-gradient-to-b from-neutral-50 via-white to-neutral-50 relative overflow-hidden {{ $class }}">
+<section class="section-spacious bg-gradient-to-b from-neutral-50 via-white to-neutral-50 relative overflow-hidden {{ $class }}">
     <!-- Luxury Background Elements -->
     <div class="absolute inset-0 opacity-[0.02]">
         <div class="absolute top-20 right-20 w-72 h-72 border border-neutral-400 rounded-full"></div>
@@ -11,18 +11,18 @@
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-neutral-200 rounded-full"></div>
     </div>
 
-    <div class="max-w-8xl mx-auto px-6 lg:px-24 relative z-10">
+    <div class="container-public relative z-10">
         <!-- Section Header with Luxury Styling -->
         <x-decorated-heading
             :overline="__('Export Process')"
             :heading="__('How to Export Your Dream Car')"
             :description="__('Our streamlined process ensures your luxury vehicle reaches you safely and efficiently, anywhere in the world')"
             alignment="center"
-            class="mb-28 luxury-fade-in"
+            class="mb-16 luxury-fade-in"
         />
 
         <!-- Export Process Steps Grid with Luxury Animations -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mb-32">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
             @php
                 $steps = __('steps');
             @endphp
@@ -76,7 +76,7 @@
         </div>
 
         <!-- Luxury Call to Action Section -->
-        <div class="text-center bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 rounded-3xl p-16 lg:p-24 relative overflow-hidden luxury-fade-in" style="animation-delay: 0.8s;">
+        <div class="text-center bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 rounded-3xl p-12 lg:p-16 relative overflow-hidden luxury-fade-in" style="animation-delay: 0.8s;">
             <!-- Sophisticated Background Overlays -->
             <div class="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-black/10"></div>
 
@@ -91,12 +91,12 @@
             </div>
 
             <!-- Premium Content -->
-            <div class="relative z-10 max-w-4xl mx-auto">
+            <div class="relative z-10 container-content">
                 <h3 class="!text-white text-4xl lg:text-5xl xl:text-6xl font-bold mb-8 font-helvetica leading-tight tracking-tight">
                     {{ __('Ready to Export Your Dream Car?') }}
                 </h3>
 
-                <p class="!text-white/80 text-xl lg:text-2xl font-helvetica font-light mb-12 max-w-2xl mx-auto leading-relaxed">
+                <p class="!text-white/80 text-xl lg:text-2xl font-helvetica font-light mb-12 container-narrow leading-relaxed">
                     {{ __('Contact our experts today for a personalized consultation and quote') }}
                 </p>
 

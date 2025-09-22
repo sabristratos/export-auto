@@ -9,6 +9,11 @@
     // Determine if this navigation item is active
     $isActive = $active || ($href !== '#' && request()->url() === url($href));
 
+    // Special case: Make Cars nav active for any car-related page
+    if (!$isActive && $href === route('cars.index')) {
+        $isActive = request()->routeIs('cars.*');
+    }
+
     // Check if white text is requested
     $isWhiteText = str_contains($class, 'text-white');
 

@@ -3,14 +3,15 @@
     'description' => __('Premium European and luxury vehicles exported worldwide with unmatched expertise and service'),
     'image' => 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7',
     'primaryButtonText' => __('Browse Our Collection'),
-    'primaryButtonUrl' => '#cars',
+    'primaryButtonUrl' => null,
     'secondaryButtonText' => __('Get a Quote'),
-    'secondaryButtonUrl' => null,
+    'secondaryButtonUrl' => '#contact',
     'class' => '',
 ])
 
 @php
-    $secondaryUrl = $secondaryButtonUrl ?: 'tel:' . setting('contact_phone');
+    $primaryUrl = $primaryButtonUrl ?: route('cars.index');
+    $secondaryUrl = $secondaryButtonUrl ?: '#contact';
 @endphp
 
 <!-- Luxury Full-Screen Hero Section -->
@@ -28,7 +29,7 @@
 
 
     <!-- Premium Content Container -->
-    <div class="relative z-20 w-full max-w-8xl mx-auto px-6 lg:px-24 h-full flex items-center">
+    <div class="relative z-20 w-full container-public h-full flex items-center">
         <div class="grid lg:grid-cols-12 gap-8 w-full">
             <!-- Main Hero Content - Asymmetric Layout -->
             <div class="lg:col-span-7 xl:col-span-6 flex flex-col justify-center min-h-[60vh]">
@@ -57,7 +58,7 @@
 
                 <!-- Luxury Action Buttons -->
                 <div class="flex flex-col sm:flex-row gap-6 luxury-fade-in" style="animation-delay: 1s;">
-                    <x-keys::button variant="brand" size="lg" href="{{ $primaryButtonUrl }}">
+                    <x-keys::button variant="brand" size="lg" href="{{ $primaryUrl }}">
                         {{ $primaryButtonText }}
                     </x-keys::button>
 

@@ -22,6 +22,7 @@ enum SettingType: string
     case Image = 'image';
     case Json = 'json';
     case Array = 'array';
+    case Html = 'html';
 
     public function label(): string
     {
@@ -44,6 +45,7 @@ enum SettingType: string
             self::Image => 'Image',
             self::Json => 'JSON',
             self::Array => 'Array',
+            self::Html => 'HTML',
         };
     }
 
@@ -69,6 +71,7 @@ enum SettingType: string
             self::Image => ['image'],
             self::Json => ['json'],
             self::Array => ['array'],
+            self::Html => ['string'],
             default => ['string'],
         };
     }

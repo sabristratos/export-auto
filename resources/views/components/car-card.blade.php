@@ -5,7 +5,7 @@
     $fallbackPhoto = 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0';
 
     // Get brand logo
-    $logoUrl = $car->make->getLogoUrl('thumb');
+    $logoUrl = $car->make->getLogoUrl();
     $hasLogo = $car->make->hasLogo();
 
     // Get key attributes
@@ -41,14 +41,15 @@
 
         <!-- Price Badge -->
         <div class="absolute top-4 right-4">
-            <x-keys::badge variant="solid" color="neutral" size="md">
+            <x-keys::badge variant="solid" color="dark" size="md">
                 €{{ number_format($car->price) }}
             </x-keys::badge>
         </div>
+
     </div>
 
     <!-- Card Content -->
-    <div class="p-6">
+    <div class="p-4">
         <!-- Make & Model with Logo -->
         <div class="mb-4">
             <!-- Make and Logo -->
@@ -73,9 +74,9 @@
         <!-- Key Specifications -->
         <div class="mb-4">
             <!-- Primary Details -->
-            <div class="flex justify-between gap-4 mb-4">
+            <div class="flex flex-wrap justify-between gap-4">
                 @if($year)
-                    <div class="flex items-start gap-2 flex-1">
+                    <div class="flex items-start gap-2 whitespace-nowrap">
                         <x-keys::icon name="heroicon-o-calendar-days" size="sm" class="text-neutral-500 mt-0.5" />
                         <div>
                             <div class="text-xs text-neutral-500 uppercase tracking-wide font-helvetica">Year</div>
@@ -85,7 +86,7 @@
                 @endif
 
                 @if($formattedMileage)
-                    <div class="flex items-start gap-2 flex-1">
+                    <div class="flex items-start gap-2 whitespace-nowrap">
                         <x-keys::icon name="heroicon-o-calculator" size="sm" class="text-neutral-500 mt-0.5" />
                         <div>
                             <div class="text-xs text-neutral-500 uppercase tracking-wide font-helvetica">Mileage</div>
@@ -95,7 +96,7 @@
                 @endif
 
                 @if($formattedPower)
-                    <div class="flex items-start gap-2 flex-1">
+                    <div class="flex items-start gap-2 whitespace-nowrap">
                         <x-keys::icon name="heroicon-o-bolt" size="sm" class="text-neutral-500 mt-0.5" />
                         <div>
                             <div class="text-xs text-neutral-500 uppercase tracking-wide font-helvetica">Power</div>
@@ -105,58 +106,99 @@
                 @endif
             </div>
 
-            <!-- Secondary Details -->
-            <div class="flex flex-wrap gap-x-4 gap-y-2 text-xs text-neutral-600">
-                @if($fuelType)
-                    <span class="flex items-center">
-                        <x-keys::icon name="heroicon-o-beaker" size="xs" class="mr-1" />
-                        {{ $fuelType }}
-                    </span>
-                @endif
-
-                @if($transmission)
-                    <span class="flex items-center">
-                        <x-keys::icon name="heroicon-o-cog-6-tooth" size="xs" class="mr-1" />
-                        {{ $transmission }}
-                    </span>
-                @endif
-
-                @if($color)
-                    <span class="flex items-center">
-                        <x-keys::icon name="heroicon-o-swatch" size="xs" class="mr-1" />
-                        {{ $color }}
-                    </span>
-                @endif
-
-                @if($formattedDoors)
-                    <span class="flex items-center">
-                        <x-keys::icon name="heroicon-o-home" size="xs" class="mr-1" />
-                        {{ $formattedDoors }}
-                    </span>
-                @endif
-            </div>
-
             <!-- Features -->
-            @if($airConditioning || $navigation || $leatherSeats)
+            @php
+                $badges = [];
+
+                // Add fuel type badge first (priority)
+                if($fuelType) {
+                    $fuelBadgeColor = match(strtolower($fuelType)) {
+                        'electric' => 'success',
+                        'hybrid', 'plug-in hybrid' => 'info',
+                        'diesel' => 'neutral',
+                        'gasoline' => 'warning',
+                        default => 'neutral'
+                    };
+                    $fuelIcon = match(strtolower($fuelType)) {
+                        'electric' => 'heroicon-o-bolt',
+                        'hybrid', 'plug-in hybrid' => 'heroicon-o-battery-100',
+                        'diesel', 'gasoline' => 'heroicon-o-beaker',
+                        default => 'heroicon-o-beaker'
+                    };
+                    $badges[] = [
+                        'label' => $fuelType,
+                        'icon' => $fuelIcon,
+                        'variant' => 'solid',
+                        'color' => $fuelBadgeColor
+                    ];
+                }
+
+                // Add other feature badges
+                if($airConditioning) {
+                    $badges[] = [
+                        'label' => 'A/C',
+                        'icon' => 'heroicon-o-cloud',
+                        'variant' => 'simple',
+                        'color' => 'neutral'
+                    ];
+                }
+
+                if($navigation) {
+                    $badges[] = [
+                        'label' => 'Navigation',
+                        'icon' => 'heroicon-o-map-pin',
+                        'variant' => 'simple',
+                        'color' => 'neutral'
+                    ];
+                }
+
+                if($leatherSeats) {
+                    $badges[] = [
+                        'label' => 'Leather',
+                        'icon' => 'heroicon-o-squares-2x2',
+                        'variant' => 'simple',
+                        'color' => 'neutral'
+                    ];
+                }
+
+                // Add transmission badge
+                if($transmission) {
+                    $badges[] = [
+                        'label' => $transmission,
+                        'icon' => 'heroicon-o-cog-6-tooth',
+                        'variant' => 'simple',
+                        'color' => 'neutral'
+                    ];
+                }
+
+                // Add color badge
+                if($color) {
+                    $badges[] = [
+                        'label' => $color,
+                        'icon' => 'heroicon-o-swatch',
+                        'variant' => 'simple',
+                        'color' => 'neutral'
+                    ];
+                }
+
+                $maxBadges = 6;
+                $visibleBadges = array_slice($badges, 0, $maxBadges - 1);
+                $hasMoreBadges = count($badges) > $maxBadges - 1;
+            @endphp
+
+            @if(count($badges) > 0)
                 <div class="flex flex-wrap gap-2 mt-4">
-                    @if($airConditioning)
-                        <x-keys::badge variant="simple" color="neutral" size="xs">
-                            <x-keys::icon name="heroicon-o-cloud" size="xs" class="mr-1" />
-                            A/C
+                    @foreach($visibleBadges as $badge)
+                        <x-keys::badge variant="{{ $badge['variant'] }}" color="{{ $badge['color'] }}" size="xs">
+                            <x-keys::icon name="{{ $badge['icon'] }}" size="xs" class="mr-1" />
+                            {{ $badge['label'] }}
                         </x-keys::badge>
-                    @endif
+                    @endforeach
 
-                    @if($navigation)
+                    @if($hasMoreBadges)
                         <x-keys::badge variant="simple" color="neutral" size="xs">
-                            <x-keys::icon name="heroicon-o-map-pin" size="xs" class="mr-1" />
-                            Navigation
-                        </x-keys::badge>
-                    @endif
-
-                    @if($leatherSeats)
-                        <x-keys::badge variant="simple" color="neutral" size="xs">
-                            <x-keys::icon name="heroicon-o-squares-2x2" size="xs" class="mr-1" />
-                            Leather
+                            <x-keys::icon name="heroicon-o-ellipsis-horizontal" size="xs" class="mr-1" />
+                            +{{ count($badges) - count($visibleBadges) }} more
                         </x-keys::badge>
                     @endif
                 </div>
@@ -170,22 +212,14 @@
             </p>
         @endif
 
-        <!-- Action Buttons -->
-        <div class="flex space-x-3">
-            <x-keys::button
-                variant="outline"
-                size="sm"
-                href="/cars/{{ $car->slug }}"
-                class="flex-1 justify-center">
-                View Details
-            </x-keys::button>
-
+        <!-- Action Button -->
+        <div>
             <x-keys::button
                 variant="brand"
                 size="sm"
-                href="/cars/{{ $car->slug }}#inquire"
-                class="flex-1 justify-center">
-                Inquire
+                href="{{ route('cars.show', $car->slug) }}"
+                class="w-full justify-center">
+                View Details
             </x-keys::button>
         </div>
     </div>

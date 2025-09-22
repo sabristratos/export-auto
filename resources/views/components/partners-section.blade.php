@@ -3,14 +3,14 @@
 ])
 
 <!-- Luxury Partners Section -->
-<section class="py-24 lg:py-32 bg-white relative overflow-hidden {{ $class }}">
+<section class="section-standard bg-white relative overflow-hidden {{ $class }}">
     <!-- Subtle Background Elements -->
     <div class="absolute inset-0 opacity-[0.015]">
         <div class="absolute top-32 left-32 w-64 h-64 border border-neutral-300 rounded-full"></div>
         <div class="absolute bottom-32 right-32 w-48 h-48 border-2 border-neutral-200 rounded-full"></div>
     </div>
 
-    <div class="max-w-8xl mx-auto px-6 lg:px-24 relative z-10">
+    <div class="container-public relative z-10">
         @php
             $partners = \App\Models\Make::active()
                 ->ordered()
@@ -36,7 +36,7 @@
 
                     <!-- Row 2: 2 Center Logos -->
                     <div class="flex justify-center space-x-16 lg:space-x-24 mb-12 luxury-fade-in" style="animation-delay: 0.2s;">
-                        @foreach($partners->skip(3)->take(2) as $partner)
+                        @foreach($partners->skip(3)->take(3) as $partner)
                             <div class="flex justify-center">
                                 <x-partner-logo :make="$partner" class="max-w-24 lg:max-w-32" />
                             </div>
@@ -45,7 +45,7 @@
 
                     <!-- Row 3: 3 Logos with Edge Fade -->
                     <div class="flex justify-between items-center luxury-fade-in" style="animation-delay: 0.3s;">
-                        @foreach($partners->skip(5)->take(3) as $partner)
+                        @foreach($partners->skip(6)->take(3) as $partner)
                             <div class="flex-1 flex justify-center">
                                 <x-partner-logo :make="$partner" class="max-w-24 lg:max-w-32" />
                             </div>

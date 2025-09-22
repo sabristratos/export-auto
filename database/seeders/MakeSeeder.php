@@ -65,25 +65,25 @@ class MakeSeeder extends Seeder
             [
                 'name' => 'Maserati',
                 'website_url' => 'https://www.maserati.com',
-                'logo_url' => 'https://logos-world.net/wp-content/uploads/2020/04/Maserati-Logo.png',
+                'logo_url' => 'https://logos-world.net/wp-content/uploads/2021/04/Maserati-Logo.png',
                 'display_order' => 9,
             ],
             [
                 'name' => 'Jaguar',
                 'website_url' => 'https://www.jaguar.com',
-                'logo_url' => 'https://logos-world.net/wp-content/uploads/2020/04/Jaguar-Logo.png',
+                'logo_url' => 'https://1000logos.net/wp-content/uploads/2019/12/Jaguar-Logo-2012.png',
                 'display_order' => 10,
             ],
             [
                 'name' => 'Land Rover',
                 'website_url' => 'https://www.landrover.com',
-                'logo_url' => 'https://logos-world.net/wp-content/uploads/2020/04/Land-Rover-Logo.png',
+                'logo_url' => 'https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/LandRover.svg/1200px-LandRover.svg.png',
                 'display_order' => 11,
             ],
             [
                 'name' => 'Lexus',
                 'website_url' => 'https://www.lexus.com',
-                'logo_url' => 'https://logos-world.net/wp-content/uploads/2020/04/Lexus-Logo.png',
+                'logo_url' => 'https://cdn.freebiesupply.com/logos/large/2x/lexus-logo-png-transparent.png',
                 'display_order' => 12,
             ],
         ];

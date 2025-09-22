@@ -33,7 +33,7 @@
                     wire:model="customer_name"
                     :label="__('Your Name')"
                     required
-                    size="lg"
+                    size="md"
                     :errors="$errors->get('customer_name')"
                     icon-left="heroicon-o-user"
                 />
@@ -44,7 +44,7 @@
                     wire:model="customer_location"
                     :label="__('Your Location')"
                     optional
-                    size="lg"
+                    size="md"
                     icon-left="heroicon-o-map-pin"
                 />
 
@@ -58,7 +58,7 @@
                         max="5"
                         step="1"
                         show-values
-                        size="lg"
+                        size="md"
                         required
                         :errors="$errors->get('rating')"
                         :ticks="[1, 2, 3, 4, 5]"
@@ -78,7 +78,7 @@
                         wire:model.live="content"
                         :placeholder="__('Share your experience with our services...')"
                         rows="4"
-                        size="lg"
+                        size="md"
                         clearable
                         required
                         :errors="$errors->get('content')"
@@ -95,6 +95,29 @@
                     <x-slot:title>Review Guidelines</x-slot:title>
                     {{ __('All reviews are moderated before publication to ensure quality and authenticity.') }}
                 </x-keys::alert>
+
+                <!-- Submit Button -->
+                <div class="flex justify-end space-x-4 pt-4">
+                    <x-keys::button
+                        variant="ghost"
+                        wire:click="closeModal"
+                        size="md"
+                    >
+                        {{ __('Cancel') }}
+                    </x-keys::button>
+
+                    <x-keys::button
+                        type="submit"
+                        variant="brand"
+                        wire:loading.attr="disabled"
+                        wire:target="submitForm"
+                        icon="heroicon-o-paper-airplane"
+                        size="md"
+                        class="w-full md:w-auto"
+                    >
+                        {{ __('Submit Review') }}
+                    </x-keys::button>
+                </div>
             </form>
         @endif
 
@@ -104,31 +127,10 @@
                 <x-keys::button
                     variant="brand"
                     wire:click="closeModal"
-                    size="lg"
+                    size="md"
                 >
                     Close
                 </x-keys::button>
-            @else
-                <div class="flex justify-end space-x-4">
-                    <x-keys::button
-                        variant="ghost"
-                        wire:click="closeModal"
-                        size="lg"
-                    >
-                        {{ __('Cancel') }}
-                    </x-keys::button>
-
-                    <x-keys::button
-                        type="submit"
-                        variant="brand"
-                        wire:click="submitReview"
-                        loading
-                        icon="heroicon-o-paper-airplane"
-                        size="lg"
-                    >
-                        {{ __('Submit Review') }}
-                    </x-keys::button>
-                </div>
             @endif
         </x-slot:footer>
     </x-keys::modal>

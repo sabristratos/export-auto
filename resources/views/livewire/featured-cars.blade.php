@@ -1,7 +1,7 @@
 <div>
     @if($this->cars->count() > 0)
         <!-- Cars Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             @foreach($this->cars as $car)
                 <x-car-card :car="$car" />
             @endforeach

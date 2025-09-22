@@ -11,7 +11,10 @@
       "WebSearch",
       "mcp__laravel-boost__last-error",
       "WebFetch(domain:www.mercedes-benz.com)",
-      "WebFetch(domain:www.bmw.com)"
+      "WebFetch(domain:www.bmw.com)",
+      "Bash(npx playwright test:*)",
+      "mcp__laravel-boost__list-routes",
+      "mcp__laravel-boost__get-config"
     ]
   },
   "enableAllProjectMcpServers": true,

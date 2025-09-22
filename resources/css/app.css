@@ -118,7 +118,7 @@
     --font-sans: 'Helvetica', 'Helvetica Neue', Arial, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 
-    --radius-base: 0rem;
+    --radius-base: 0.5rem;
 
     --color-brand-50: oklch(0.975 0.025 15);
     --color-brand-100: oklch(0.935 0.05 15);
@@ -252,6 +252,24 @@ html {
 
 
 
+/* Global Container Classes */
+.container-public {
+    @apply container mx-auto px-6 lg:px-24;
+}
+
+/* Compact Section Spacing Classes */
+.section-compact {
+    @apply py-12 lg:py-16;
+}
+
+.section-standard {
+    @apply py-16 lg:py-20;
+}
+
+.section-spacious {
+    @apply py-20 lg:py-24;
+}
+
 /* Partner Logo Filters - Grayscale Effect */
 .partner-logo-filter {
     filter: grayscale(100%);
@@ -264,6 +282,211 @@ html {
     filter: grayscale(0%);
     opacity: 1;
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+p {
+    @apply leading-tight text-base;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold font-helvetica;
+}
+
+/* Legal Document Content Styling */
+.legal-content {
+    @apply text-neutral-700 font-helvetica;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    font-feature-settings: "kern" 1, "liga" 1;
+    text-rendering: optimizeLegibility;
+}
+
+.legal-content h1 {
+    @apply text-neutral-900 font-helvetica;
+    font-weight: 300;
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgb(229 229 229);
+    padding-bottom: 1rem;
+}
+
+.legal-content h2 {
+    @apply text-blue-900 font-helvetica;
+    font-weight: 500;
+    font-size: 1.75rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.legal-content h3 {
+    @apply text-neutral-800 font-helvetica;
+    font-weight: 500;
+    font-size: 1.375rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.legal-content h4 {
+    @apply text-neutral-800 font-helvetica;
+    font-weight: 500;
+    font-size: 1.125rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.legal-content p {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.legal-content strong {
+    @apply text-neutral-900;
+    font-weight: 600;
+}
+
+.legal-content a {
+    @apply text-blue-600;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.legal-content a:hover {
+    @apply text-blue-700;
+    text-decoration: underline;
+}
+
+.legal-content ul, .legal-content ol {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.legal-content ul {
+    list-style-type: disc;
+}
+
+.legal-content ol {
+    list-style-type: decimal;
+}
+
+.legal-content li {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.8;
+}
+
+.legal-content ul ul, .legal-content ol ol {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.legal-content blockquote {
+    border-left: 4px solid rgb(59 130 246);
+    background-color: rgb(239 246 255);
+    padding: 1rem 1.5rem;
+    font-style: italic;
+    margin: 1.5rem 0;
+}
+
+.legal-content code {
+    @apply text-blue-800;
+    background-color: rgb(239 246 255);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+.legal-content table {
+    border: 1px solid rgb(229 229 229);
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5rem 0;
+    font-variant-numeric: lining-nums tabular-nums;
+}
+
+.legal-content thead {
+    background-color: rgb(249 250 251);
+}
+
+.legal-content th {
+    border: 1px solid rgb(229 229 229);
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    text-align: left;
+    @apply text-neutral-900;
+}
+
+.legal-content td {
+    border: 1px solid rgb(229 229 229);
+    padding: 0.75rem 1rem;
+}
+
+.legal-content hr {
+    border: none;
+    border-top: 1px solid rgb(229 229 229);
+    margin: 2rem 0;
+}
+
+/* Professional spacing adjustments */
+.legal-content h1 + h2 {
+    margin-top: 1.5rem;
+}
+
+.legal-content h2 + h3 {
+    margin-top: 1rem;
+}
+
+.legal-content h3 + h4 {
+    margin-top: 0.75rem;
+}
+
+/* First and last child spacing */
+.legal-content > *:first-child {
+    margin-top: 0;
+}
+
+.legal-content > *:last-child {
+    margin-bottom: 0;
+}
+
+/* RTL Support for Arabic Content */
+.legal-content-rtl {
+    direction: rtl;
+    text-align: right;
+    @apply font-montserrat;
+}
+
+.legal-content-rtl h1,
+.legal-content-rtl h2,
+.legal-content-rtl h3,
+.legal-content-rtl h4,
+.legal-content-rtl h5,
+.legal-content-rtl h6 {
+    text-align: right;
+    @apply font-montserrat;
+}
+
+.legal-content-rtl ul,
+.legal-content-rtl ol {
+    padding-left: 0;
+    padding-right: 1.5rem;
+}
+
+.legal-content-rtl li {
+    text-align: right;
+}
+
+.legal-content-rtl th {
+    text-align: right;
+}
+
+.legal-content-rtl blockquote {
+    border-left: none;
+    border-right: 4px solid rgb(59 130 246);
 }
 
 

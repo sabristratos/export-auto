@@ -3,14 +3,14 @@
     'class' => ''
 ])
 
-<div class="max-w-4xl mx-auto text-left space-y-6 {{ $class }}">
+<div class="container-content text-left space-y-4 {{ $class }}">
     <!-- Star Rating -->
-    <div class="mb-6">
+    <div class="mb-4">
         <x-star-rating-display :rating="$review->rating" size="md" />
     </div>
 
     <!-- Review Content -->
-    <div class="mb-8">
+    <div class="mb-6">
         <blockquote class="text-neutral-700 font-helvetica font-light leading-relaxed text-lg">
             "{{ $review->content }}"
         </blockquote>

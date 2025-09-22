@@ -5,6 +5,7 @@
     'conversion' => null,
     'class' => '',
     'alt' => null,
+    'variant' => 'light', // 'light' or 'dark'
 ])
 
 @php
@@ -39,7 +40,12 @@
     $logoSizeClass = $sizeClasses[$size] ?? $sizeClasses['md'];
     $textSizeClass = $textSizeClasses[$size] ?? $textSizeClasses['md'];
 
-    $logoClasses = $logoSizeClass . ' ' . $class;
+    // Color variants
+    $isLight = $variant === 'light';
+    $imageColorClasses = $isLight ? 'brightness-0 invert' : '';
+    $textColorClasses = $isLight ? 'text-white' : 'text-neutral-900';
+
+    $logoClasses = $logoSizeClass . ' ' . $imageColorClasses . ' ' . $class;
 @endphp
 
 @if($link)
@@ -47,16 +53,16 @@
         @if($imageUrl && !$showText)
             <img src="{{ $imageUrl }}"
                  alt="{{ $altText }}"
-                 class="{{ $logoClasses }} brightness-0 invert"
+                 class="{{ $logoClasses }}"
                  loading="lazy">
         @elseif($showText || !$imageUrl)
-            <span class="{{ $textSizeClass }} text-white font-helvetica">
+            <span class="{{ $textSizeClass }} {{ $textColorClasses }} font-helvetica">
                 {{ $siteName }}
             </span>
         @endif
 
         @if($showText && $imageUrl)
-            <span class="{{ $textSizeClass }} text-white font-helvetica">
+            <span class="{{ $textSizeClass }} {{ $textColorClasses }} font-helvetica">
                 {{ $siteName }}
             </span>
         @endif
@@ -66,16 +72,16 @@
         @if($imageUrl && !$showText)
             <img src="{{ $imageUrl }}"
                  alt="{{ $altText }}"
-                 class="{{ $logoClasses }} brightness-0 invert"
+                 class="{{ $logoClasses }}"
                  loading="lazy">
         @elseif($showText || !$imageUrl)
-            <span class="{{ $textSizeClass }} text-white font-helvetica">
+            <span class="{{ $textSizeClass }} {{ $textColorClasses }} font-helvetica">
                 {{ $siteName }}
             </span>
         @endif
 
         @if($showText && $imageUrl)
-            <span class="{{ $textSizeClass }} text-white font-helvetica">
+            <span class="{{ $textSizeClass }} {{ $textColorClasses }} font-helvetica">
                 {{ $siteName }}
             </span>
         @endif
