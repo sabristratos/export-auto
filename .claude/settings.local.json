@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__laravel-boost__application-info",
+      "mcp__laravel-boost__search-docs",
+      "Bash(dir:*)",
+      "Bash(cmd //c:*)",
+      "mcp__laravel-boost__database-query",
+      "mcp__laravel-boost__database-schema",
+      "mcp__laravel-boost__tinker",
+      "WebSearch",
+      "mcp__laravel-boost__last-error",
+      "WebFetch(domain:www.mercedes-benz.com)",
+      "WebFetch(domain:www.bmw.com)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "laravel-boost"
+  ]
+}
