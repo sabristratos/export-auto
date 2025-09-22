@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Services\SettingsService;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,6 +20,27 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->alias('settings', SettingsService::class);
+
+        $this->enforceSecureUrls();
+        $this->optimizeViteSettings();
+    }
+
+    /**
+     * Force HTTPS in non-local environments.
+     */
+    private function enforceSecureUrls(): void
+    {
+        if (! $this->app->environment('local')) {
+            URL::forceScheme('https');
+        }
+    }
+
+    /**
+     * Optimize Vite asset loading strategy.
+     */
+    private function optimizeViteSettings(): void
+    {
+        Vite::usePrefetchStrategy('aggressive');
     }
 
     /**

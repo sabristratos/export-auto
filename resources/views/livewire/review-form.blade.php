@@ -120,19 +120,6 @@
                 </div>
             </form>
         @endif
-
-        <!-- Modal Footer -->
-        <x-slot:footer>
-            @if($showSuccess)
-                <x-keys::button
-                    variant="brand"
-                    wire:click="closeModal"
-                    size="md"
-                >
-                    Close
-                </x-keys::button>
-            @endif
-        </x-slot:footer>
     </x-keys::modal>
 
     <!-- Custom styling for star rating -->

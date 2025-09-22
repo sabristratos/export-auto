@@ -52,7 +52,7 @@
                     <x-keys::button
                         variant="ghost"
                         size="sm"
-                        icon=""
+                        icon="heroicon-o-bars-3"
                         class="{{ $textClasses }} hover:{{ $isOverlay ? 'text-white' : 'text-neutral-700' }}"
                         @click="mobileMenuOpen = !mobileMenuOpen"
                         ::aria-expanded="mobileMenuOpen" />

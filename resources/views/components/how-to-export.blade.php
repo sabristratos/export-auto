@@ -114,7 +114,7 @@
                         variant="outline"
                         size="lg"
                         href="tel:{{ setting('contact_phone', '+1-555-0123') }}"
-                        class="px-12 py-4"
+                        class="px-12 py-4 text-white hover:text-brand"
                     >
                         {{ __('Call Now') }}
                     </x-keys::button>
